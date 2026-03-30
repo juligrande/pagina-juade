@@ -49,16 +49,18 @@ ul {
     padding: 5rem 0;
 }
 .btn-ml-flex {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 }
 
 .btn-ml-flex img {
-    height: 20px;
-    width: auto;
+    position: absolute;
+    left: 15px;
+    height: 18px;
 }
+
 .bg-beige {
     background-color: var(--bg-beige);
 }
@@ -183,8 +185,8 @@ ul {
 }
 
 .btn-ml {
-    background-color: var(--ml-blue);
-    color: white;
+    background-color: #ffe600;
+    color: #000;
     width: 100%;
     text-align: center;
     padding: 1.2rem;
