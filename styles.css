@@ -3,7 +3,7 @@
     --bg-white: #ffffff;
     --bg-beige: #f9f8f6;
     --bg-gray-img: #f2f2f2; 
-    --text-main: #111111; /* Negro absoluto */
+    --text-main: #111111; 
     --text-muted: #666666;
     --ml-blue: #3483fa;
     --transition: all 0.3s ease;
@@ -12,29 +12,17 @@
 /* --- RESET & TYPOGRAPHY --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 70px; }
-body { 
-    font-family: 'Inter', sans-serif; 
-    color: var(--text-main); 
-    background-color: var(--bg-white); 
-    line-height: 1.5; 
-    overflow-x: hidden; 
-    padding-top: 70px; /* Altura del nav */
-    -webkit-font-smoothing: antialiased; /* Suaviza las fuentes */
-}
+body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--bg-white); line-height: 1.5; overflow-x: hidden; padding-top: 70px; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 .container { width: 92%; max-width: 1300px; margin: 0 auto; }
-.section { padding: 1rem 0 3rem 0; } /* Padding reducido para que los productos suban */
+.section { padding: 4rem 0 5rem 0; } 
 .btn-ml-flex { position: relative; display: flex; align-items: center; justify-content: center; }
 .btn-ml-flex img { height: 18px; width: auto; margin-right: 10px; }
-.bg-beige { background-color: var(--bg-beige); padding: 4rem 0 !important; }
+.bg-beige { background-color: var(--bg-beige); }
 .text-center { text-align: center; }
 
-/* Tipografía de títulos estilo premium */
-h1, h2, h3, .logo {
-    letter-spacing: -0.04em; 
-    font-weight: 800;
-}
+h1, h2, h3, .logo { letter-spacing: -0.04em; font-weight: 800; }
 
 /* --- NAVBAR --- */
 .navbar { position: fixed; top: 0; width: 100%; background-color: var(--bg-white); z-index: 1000; height: 70px; display: flex; align-items: center;}
@@ -68,74 +56,57 @@ h1, h2, h3, .logo {
 .search-result-title { font-size: 0.9rem; font-weight: 600; color: var(--text-main); letter-spacing: -0.02em;}
 .search-result-variants { font-size: 0.75rem; color: #888; margin-top: 2px; }
 
-/* --- HERO SLIDER (ESTILO BANNER CHICO) --- */
-.hero-slider { 
-    position: relative; 
-    width: 100%; 
-    height: 380px; /* Alto fijo mucho mas chico */
-    overflow: hidden; 
-}
+/* --- HERO SLIDER --- */
+.hero-slider { position: relative; width: 100%; height: 380px; overflow: hidden; }
 .slider-container { width: 100%; height: 100%; position: relative; overflow: hidden; }
+.slider-track { display: flex; height: 100%; width: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+.slide { flex: 0 0 100%; width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; }
+.slide-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.25); }
+.hero-content { position: relative; z-index: 1; color: var(--bg-white); display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.hero-content h1 { font-size: 3.5rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 
-.slider-track {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.slide { 
-    flex: 0 0 100%; width: 100%; height: 100%;
-    background-size: cover; background-position: center;
-    position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
-}
-
-.slide-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2); }
-
-.hero-content {
-    position: relative; z-index: 1; color: var(--bg-white);
-    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
-}
-.hero-content h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-
-.slider-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    display: flex; align-items: center; justify-content: center;
-    height: 2.8rem; width: 2.8rem; border-radius: 50%; 
-    background-color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 0, 0, 0.1); 
-    color: #111; font-size: 1rem; cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); backdrop-filter: blur(4px); 
-    transition: all 0.3s ease; z-index: 10;
-}
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; height: 2.8rem; width: 2.8rem; border-radius: 50%; background-color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 0, 0, 0.1); color: #111; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); backdrop-filter: blur(4px); transition: all 0.3s ease; z-index: 10; }
 .slider-btn:hover { background-color: var(--bg-white); transform: translateY(-50%) scale(1.05); }
 .slider-btn.prev { left: 2%; }
 .slider-btn.next { right: 2%; }
 
 /* --- BUTTONS --- */
 .btn { display: inline-block; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; }
-
-/* Botón del slider estilo píldora chicota */
-.btn-primary { 
-    background-color: var(--bg-white); color: var(--text-main); 
-    padding: 0.6rem 1.8rem; border-radius: 40px; font-size: 0.9rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+.btn-primary { background-color: var(--bg-white); color: var(--text-main); padding: 0.6rem 1.8rem; border-radius: 40px; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-
 .btn-outline { background-color: transparent; color: var(--text-main); border: 1px solid var(--text-main); padding: 0.8rem 2rem; border-radius: 4px; font-size: 0.95rem;}
 .btn-outline:hover { background-color: var(--text-main); color: var(--bg-white); }
 .btn-ml { background-color: #ffe600; color: #000; width: 100%; text-align: center; padding: 1.2rem; font-weight: 700; font-size: 1.1rem; border-radius: 6px; margin-top: 1rem; letter-spacing: -0.02em;}
 .btn-ml:hover { background-color: #e6cf00; transform: translateY(-2px); }
 
-/* --- PROMO TEXT (Estilo Keyframe debajo del banner) --- */
-.promo-banner { padding: 3rem 0; text-align: center; }
+/* --- PROMO TEXT --- */
+.promo-banner { padding: 3rem 0 1rem 0; text-align: center; }
 .promo-text { font-size: 1.6rem; font-weight: 800; }
 .badge { background-color: #e63946; color: white; padding: 0.1rem 0.6rem; border-radius: 4px; font-size: 1.4rem; display: inline-block; vertical-align: text-bottom; margin: 0 4px;}
 
+/* --- EXCLUSIVE BANNER (MEDIO DE LA PÁGINA) --- */
+.exclusive-banner {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background-image: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=2000&auto=format&fit=crop'); /* Foto de madera linda */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto Parallax súper premium */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.exclusive-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
+.exclusive-content { position: relative; z-index: 1; color: var(--bg-white); display: flex; flex-direction: column; align-items: center; gap: 1.5rem; max-width: 600px; }
+.exclusive-content h2 { font-size: 2.8rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+.exclusive-content p { font-size: 1.1rem; opacity: 0.9; font-weight: 400; }
+
 /* --- PRODUCTS GRID --- */
-.section-title { font-size: 2rem; font-weight: 800; margin-bottom: 2rem; text-align: center; }
+.section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 2.5rem; text-align: center; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 3rem 1.5rem; }
-.card { background: var(--bg-white); cursor: pointer; display: flex; flex-direction: column; }
+.card { background: transparent; cursor: pointer; display: flex; flex-direction: column; }
 .card-img-wrapper { width: 100%; aspect-ratio: 4/5; background-color: var(--bg-gray-img); border-radius: 2px; overflow: hidden; position: relative; margin-bottom: 1rem; }
 .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .card:hover .card-img-wrapper img { transform: scale(1.03); }
@@ -160,10 +131,14 @@ h1, h2, h3, .logo {
 .modal-description { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
 
 /* --- FOOTER --- */
-.contact-text { margin-bottom: 2rem; color: var(--text-muted); }
-.footer { padding: 4rem 0; background-color: #000; color: var(--bg-white); } /* Footer más pesado para dar cierre */
-.footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: -0.05em; }
-.footer-text { font-size: 0.9rem; color: #888; }
+.footer { padding: 4rem 0 2rem 0; background-color: #0c0c0c; color: var(--bg-white); } 
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; }
+.footer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: -0.05em; }
+.footer-col h4 { font-size: 1rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-col ul li a { color: #888; transition: var(--transition); font-size: 0.9rem; }
+.footer-col ul li a:hover { color: #fff; }
+.footer-text { font-size: 0.9rem; color: #888; margin-bottom: 0.5rem; }
 
 /* --- ANIMATIONS (SCROLL) --- */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -176,8 +151,10 @@ h1, h2, h3, .logo {
     .modal-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .modal-content { padding: 1.5rem; }
     .modal-image-container img { max-height: 40vh; }
-    .section { padding: 2rem 0; }
+    .section { padding: 3rem 0; }
     .hero-slider { height: 280px; }
+    .exclusive-banner { height: 350px; }
+    .exclusive-content h2 { font-size: 2rem; }
     .promo-banner { padding: 2rem 1rem; }
     .promo-text { font-size: 1.3rem; }
     .badge { font-size: 1.1rem; }

@@ -1,5 +1,6 @@
-// --- DATOS DE PRODUCTOS ---
+// --- DATOS DE PRODUCTOS (Ahora son 8 para llenar la página) ---
 const productos = [
+    // Primeros 4 para Últimos Lanzamientos
     {
         id: 1,
         name: "Mesa de Comedor Maciza",
@@ -35,6 +36,43 @@ const productos = [
         description: "Banco artesanal con estilo rústico, resistente y elegante. Ensamblado a mano con técnicas tradicionales de carpintería que garantizan su durabilidad a través del tiempo.",
         image: "https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
+    },
+    // Siguientes 4 para Los Más Vendidos
+    {
+        id: 5,
+        name: "Silla Nórdica Curva",
+        price: 35000,
+        variants: "Haya, Fresno",
+        description: "Silla de diseño nórdico con respaldo curvo para mayor ergonomía. Fabricada en madera torneada de alta resistencia.",
+        image: "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1000&auto=format&fit=crop",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
+    },
+    {
+        id: 6,
+        name: "Mesa Ratona Industrial",
+        price: 55000,
+        variants: "Roble Oscuro, Natural",
+        description: "Mesa de centro que combina madera maciza con patas de hierro negro. Un toque industrial y cálido para tu living.",
+        image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=1000&auto=format&fit=crop",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
+    },
+    {
+        id: 7,
+        name: "Perchero de Pie Premium",
+        price: 28000,
+        variants: "Nogal, Paraíso",
+        description: "Perchero minimalista de madera maciza. Excelente estabilidad y diseño que se adapta a cualquier rincón de tu casa.",
+        image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1000&auto=format&fit=crop",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
+    },
+    {
+        id: 8,
+        name: "Biblioteca Geométrica",
+        price: 120000,
+        variants: "Cruda, Barnizada",
+        description: "Biblioteca de diseño asimétrico para exhibir libros y decoración. Amplio espacio de guardado y estructura súper firme.",
+        image: "https://images.unsplash.com/photo-1594620302200-9a762244a156?q=80&w=1000&auto=format&fit=crop",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
     }
 ];
 
@@ -68,12 +106,15 @@ function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 setInterval(nextSlide, 10000);
 
-// --- RENDERIZAR PRODUCTOS EN GRILLA ---
-const renderProducts = () => {
-    const grid = document.getElementById('products-grid');
+// --- RENDERIZAR PRODUCTOS EN GRILLAS SEPARADAS ---
+// Creamos una funcion que recibe la lista de productos y el ID del contenedor
+const renderGrid = (listaProductos, containerId) => {
+    const grid = document.getElementById(containerId);
+    if(!grid) return;
+    
     grid.innerHTML = '';
     
-    productos.forEach(producto => {
+    listaProductos.forEach(producto => {
         const card = document.createElement('article');
         card.className = 'card';
         card.onclick = () => openModal(producto.id);
@@ -213,7 +254,13 @@ const scrollObserver = new IntersectionObserver((entries) => {
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
-    renderProducts();
+    
+    // Repartimos los productos en las dos grillas
+    const ultimosLanzamientos = productos.slice(0, 4); // Los primeros 4
+    const masVendidos = productos.slice(4, 8); // Los ultimos 4
+    
+    renderGrid(ultimosLanzamientos, 'grid-lanzamientos');
+    renderGrid(masVendidos, 'grid-vendidos');
     
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));

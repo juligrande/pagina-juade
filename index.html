@@ -71,7 +71,7 @@
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
                         <h1>Última Colección</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
                 
@@ -79,7 +79,7 @@
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
                         <h1>Diseños Exclusivos</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
 
@@ -90,15 +90,32 @@
         <button class="slider-btn next" aria-label="Siguiente" onclick="nextSlide()">&#10095;</button>
     </section>
 
-    <div class="promo-banner">
-        <h2 class="promo-text">Hecho a<span class="badge">mano</span>con madera natural</h2>
+    <div class="promo-banner fade-in">
+        <h2 class="promo-text">Envío <span class="badge">Gratis</span> llevando 2 o más productos</h2>
     </div>
 
-    <main id="productos" class="section">
+    <main id="lanzamientos" class="section">
         <div class="container">
-            <div id="products-grid" class="grid fade-in"></div>
+            <h2 class="section-title fade-in">Últimos Lanzamientos</h2>
+            <div id="grid-lanzamientos" class="grid fade-in"></div>
         </div>
     </main>
+
+    <!-- <section class="exclusive-banner fade-in">
+        <div class="exclusive-overlay"></div>
+        <div class="container exclusive-content">
+            <h2>Obtené Acceso Exclusivo</h2>
+            <p>Recibí antes que nadie acceso a nuestros lanzamientos, descuentos únicos y mucho más.</p>
+            <button class="btn btn-primary">Quiero Acceso Exclusivo</button>
+        </div>
+    </section> -->
+
+    <section id="mas-vendidos" class="section bg-beige">
+        <div class="container">
+            <h2 class="section-title fade-in">Los Más Vendidos</h2>
+            <div id="grid-vendidos" class="grid fade-in"></div>
+        </div>
+    </section>
 
     <dialog id="product-modal" class="modal">
         <div class="modal-content">
@@ -120,18 +137,31 @@
         </div>
     </dialog>
 
-    <section id="contacto" class="section bg-beige" style="margin-top: 4rem;">
-        <div class="container text-center fade-in">
-            <h2 class="section-title">¿Querés un producto personalizado?</h2>
-            <p class="contact-text">Escribinos y lo hacemos realidad.</p>
-            <a href="mailto:contacto@maderasgrande.com" class="btn btn-outline">contacto@juade67.com</a>
-        </div>
-    </section>
-
     <footer class="footer">
-        <div class="container text-center">
-            <p class="footer-logo">Juade6767</p>
-            <p>&copy; <span id="current-year"></span> Juade6767</p>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <p class="footer-logo">Juade6767</p>
+                <p class="footer-text">Diseños en madera maciza.</p>
+                <p class="footer-text">Hecho en Buenos Aires.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Sitio</h4>
+                <ul>
+                    <li><a href="#lanzamientos">Productos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Redes</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container text-center" style="margin-top: 3rem; border-top: 1px solid #333; padding-top: 1.5rem;">
+            <p class="footer-text">&copy; <span id="current-year"></span> Juade6767. Todos los derechos reservados.</p>
         </div>
     </footer>
 
