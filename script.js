@@ -1,5 +1,4 @@
 // --- DATOS DE PRODUCTOS ---
-// Imágenes extraídas de Unsplash (alta calidad, uso libre) para dar look premium
 const productos = [
     {
         id: 1,
@@ -36,7 +35,6 @@ const productos = [
 ];
 
 // --- UTILIDADES ---
-// Formatear precio a Pesos Argentinos
 const formatPrice = (price) => {
     return new Intl.NumberFormat('es-AR', {
         style: 'currency',
@@ -45,6 +43,26 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
+// --- SLIDER LOGIC ---
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    if (index >= slides.length) currentSlide = 0;
+    else if (index < 0) currentSlide = slides.length - 1;
+    else currentSlide = index;
+    
+    slides[currentSlide].classList.add('active');
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+
+// Autoplay slider
+setInterval(nextSlide, 5000);
+
 // --- RENDERIZAR PRODUCTOS ---
 const renderProducts = () => {
     const grid = document.getElementById('products-grid');
@@ -52,15 +70,19 @@ const renderProducts = () => {
     productos.forEach(producto => {
         const card = document.createElement('article');
         card.className = 'card';
+        // Agregamos el onclick a TODA la card
+        card.onclick = () => openModal(producto.id);
         
         card.innerHTML = `
             <div class="card-img-wrapper">
                 <img src="${producto.image}" alt="${producto.name}" loading="lazy">
+                <div class="card-overlay">
+                    <button class="btn-ver-mas">Ver detalles</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
-                <p class="card-price">${formatPrice(producto.price)}</p>
-                <button class="btn btn-card" onclick="openModal(${producto.id})">Ver más</button>
+                <p class="card-price">${formatPrice(producto.price)} USD</p>
             </div>
         `;
         
@@ -72,14 +94,12 @@ const renderProducts = () => {
 const modal = document.getElementById('product-modal');
 const closeModalBtn = document.getElementById('close-modal');
 
-// Elementos del modal
 const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-desc');
 const modalPrice = document.getElementById('modal-price');
 const modalLink = document.getElementById('modal-link');
 
-// Función para abrir modal y cargar datos
 window.openModal = (id) => {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
@@ -92,19 +112,16 @@ window.openModal = (id) => {
     modalLink.href = producto.link;
 
     modal.showModal();
-    // Prevenir scroll en el body cuando el modal está abierto
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; 
 };
 
-// Cerrar modal
 const closeModal = () => {
     modal.close();
-    document.body.style.overflow = 'auto'; // Restaurar scroll
+    document.body.style.overflow = 'auto'; 
 };
 
 closeModalBtn.addEventListener('click', closeModal);
 
-// Cerrar modal al hacer clic fuera de él (en el backdrop)
 modal.addEventListener('click', (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
@@ -117,29 +134,24 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// --- ANIMACIONES ON SCROLL (Intersection Observer) ---
+// --- ANIMACIONES ON SCROLL ---
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-            // Opcional: dejar de observar una vez que ya apareció
-            // scrollObserver.unobserve(entry.target); 
+            scrollObserver.unobserve(entry.target); // Solo se anima la primera vez
         }
     });
 }, {
-    threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+    threshold: 0.15,
     rootMargin: "0px 0px -50px 0px"
 });
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Cargar el año en el footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // 2. Renderizar productos
     renderProducts();
     
-    // 3. Activar observador de animaciones
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 });
