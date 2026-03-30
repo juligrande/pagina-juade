@@ -56,9 +56,9 @@ ul {
 }
 
 .btn-ml-flex img {
-    position: absolute;
-    left: 15px;
     height: 18px;
+    width: auto;
+    margin-right: 10px; 
 }
 
 .bg-beige {
