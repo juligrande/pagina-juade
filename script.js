@@ -1,5 +1,4 @@
 // --- DATOS DE PRODUCTOS ---
-// Se agregó "variants" para simular los colores/maderas del buscador
 const productos = [
     {
         id: 1,
@@ -48,23 +47,30 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- SLIDER LOGIC ---
+// --- SLIDER LOGIC CON EFECTO SLIDE Y 10 SEGUNDOS ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
+const sliderTrack = document.getElementById('slider-track');
+const totalSlides = slides.length;
 
 function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
     
-    if (index >= slides.length) currentSlide = 0;
-    else if (index < 0) currentSlide = slides.length - 1;
-    else currentSlide = index;
-    
-    slides[currentSlide].classList.add('active');
+    // Mueve el carril a la izquierda dependiendo del slide actual
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
-setInterval(nextSlide, 5000);
+
+// Intervalo de 10 segundos (10000 ms)
+setInterval(nextSlide, 10000);
 
 // --- RENDERIZAR PRODUCTOS EN GRILLA ---
 const renderProducts = () => {
@@ -99,27 +105,23 @@ const searchDropdown = document.getElementById('search-dropdown');
 const searchInput = document.getElementById('search-input');
 const searchResultsContainer = document.getElementById('search-results');
 
-// Abrir/Cerrar panel de búsqueda
 searchTrigger.addEventListener('click', (e) => {
     e.preventDefault();
     searchDropdown.classList.toggle('active');
     if(searchDropdown.classList.contains('active')) {
         searchInput.focus();
-        renderSearchResults(''); // Muestra todos al abrir
+        renderSearchResults(''); 
     }
 });
 
-// Escribir en el buscador
 searchInput.addEventListener('input', (e) => {
     renderSearchResults(e.target.value);
 });
 
-// Renderizar lista del buscador
 function renderSearchResults(query) {
     searchResultsContainer.innerHTML = '';
     const term = query.toLowerCase().trim();
     
-    // Filtra los productos que coincidan en nombre o variante
     const filtered = productos.filter(p => 
         p.name.toLowerCase().includes(term) || 
         p.variants.toLowerCase().includes(term)
@@ -130,12 +132,10 @@ function renderSearchResults(query) {
         return;
     }
 
-    // Crea el HTML (Fotito cuadrada + Título + Variantes abajo gris)
     filtered.forEach(producto => {
         const li = document.createElement('li');
         li.className = 'search-result-item';
         
-        // Al tocar un resultado, cierra el buscador y abre el modal grande
         li.onclick = () => {
             searchDropdown.classList.remove('active');
             openModal(producto.id);
@@ -152,7 +152,6 @@ function renderSearchResults(query) {
     });
 }
 
-// Ocultar buscador si se hace clic afuera
 document.addEventListener('click', (e) => {
     if (!searchTrigger.contains(e.target) && !searchDropdown.contains(e.target)) {
         searchDropdown.classList.remove('active');
