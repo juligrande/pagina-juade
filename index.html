@@ -20,7 +20,43 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#productos">Productos</a></li>
+                    
+                    <li class="dropdown-item">
+                        <a href="#productos">Productos <span style="font-size: 0.7rem; margin-left: 2px;">▼</span></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Categorías</h4>
+                                <ul>
+                                    <li><a href="#productos">Mesas de Comedor</a></li>
+                                    <li><a href="#productos">Estanterías</a></li>
+                                    <li><a href="#productos">Escritorios</a></li>
+                                    <li><a href="#productos">Bancos y Sillas</a></li>
+                                    <li><a href="#productos">Accesorios</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Filtros</h4>
+                                <ul>
+                                    <li><a href="#productos">Últimos Lanzamientos</a></li>
+                                    <li><a href="#productos">Los Más Vendidos</a></li>
+                                    <li><a href="#productos">Últimas unidades</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="search-item">
+                        <a href="#" id="search-trigger">Buscar ⌕</a>
+                        <div class="search-dropdown" id="search-dropdown">
+                            <div class="search-input-wrapper">
+                                <span class="search-icon">⌕</span>
+                                <input type="text" id="search-input" placeholder="Buscar productos...">
+                            </div>
+                            <ul class="search-results" id="search-results">
+                                </ul>
+                        </div>
+                    </li>
+
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
@@ -33,7 +69,6 @@
                 <div class="slide-overlay"></div>
                 <div class="container hero-content fade-in">
                     <h1>Diseños en madera de calidad premium</h1>
-                    <p>Productos únicos, duraderos y hechos a medida</p>
                     <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver productos</button>
                 </div>
             </div>
@@ -41,7 +76,6 @@
                 <div class="slide-overlay"></div>
                 <div class="container hero-content fade-in">
                     <h1>Muebles que cuentan una historia</h1>
-                    <p>Madera maciza tratada con el mayor cuidado.</p>
                     <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver productos</button>
                 </div>
             </div>
@@ -81,7 +115,7 @@
     <section id="contacto" class="section bg-beige">
         <div class="container text-center fade-in">
             <h2 class="section-title">¿Querés un producto personalizado?</h2>
-            <p class="contact-text">Escribinos.</p>
+            <p class="contact-text">Escribinos y lo hacemos realidad.</p>
             <a href="mailto:contacto@maderasgrande.com" class="btn btn-outline">contacto@juade67.com</a>
         </div>
     </section>

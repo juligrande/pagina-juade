@@ -1,9 +1,11 @@
 // --- DATOS DE PRODUCTOS ---
+// Se agregó "variants" para simular los colores/maderas del buscador
 const productos = [
     {
         id: 1,
         name: "Mesa de comedor de madera maciza",
         price: 180000,
+        variants: "Roble, Petiribí, Nogal",
         description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas.",
         image: "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
@@ -12,6 +14,7 @@ const productos = [
         id: 2,
         name: "Estante flotante minimalista",
         price: 25000,
+        variants: "Natural, Blanco, Negro",
         description: "Estante moderno de líneas limpias, ideal para decoración y organización en salas de estar, dormitorios o recibidores. Sistema de anclaje invisible de alta resistencia incluido.",
         image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
@@ -20,6 +23,7 @@ const productos = [
         id: 3,
         name: "Escritorio de madera natural",
         price: 95000,
+        variants: "Paraíso, Guatambú",
         description: "Escritorio amplio con acabado natural y estructura firme, perfecto para home office o estudios. Diseño ergonómico pensado para la comodidad durante largas horas de trabajo.",
         image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
@@ -28,6 +32,7 @@ const productos = [
         id: 4,
         name: "Banco rústico de madera",
         price: 40000,
+        variants: "Rústico, Barnizado",
         description: "Banco artesanal con estilo rústico, resistente y elegante. Ensamblado a mano con técnicas tradicionales de carpintería que garantizan su durabilidad a través del tiempo.",
         image: "https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
@@ -59,18 +64,16 @@ function showSlide(index) {
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
-
-// Autoplay slider
 setInterval(nextSlide, 5000);
 
-// --- RENDERIZAR PRODUCTOS ---
+// --- RENDERIZAR PRODUCTOS EN GRILLA ---
 const renderProducts = () => {
     const grid = document.getElementById('products-grid');
+    grid.innerHTML = '';
     
     productos.forEach(producto => {
         const card = document.createElement('article');
         card.className = 'card';
-        // Agregamos el onclick a TODA la card
         card.onclick = () => openModal(producto.id);
         
         card.innerHTML = `
@@ -90,10 +93,75 @@ const renderProducts = () => {
     });
 };
 
+// --- LÓGICA DEL BUSCADOR ---
+const searchTrigger = document.getElementById('search-trigger');
+const searchDropdown = document.getElementById('search-dropdown');
+const searchInput = document.getElementById('search-input');
+const searchResultsContainer = document.getElementById('search-results');
+
+// Abrir/Cerrar panel de búsqueda
+searchTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    searchDropdown.classList.toggle('active');
+    if(searchDropdown.classList.contains('active')) {
+        searchInput.focus();
+        renderSearchResults(''); // Muestra todos al abrir
+    }
+});
+
+// Escribir en el buscador
+searchInput.addEventListener('input', (e) => {
+    renderSearchResults(e.target.value);
+});
+
+// Renderizar lista del buscador
+function renderSearchResults(query) {
+    searchResultsContainer.innerHTML = '';
+    const term = query.toLowerCase().trim();
+    
+    // Filtra los productos que coincidan en nombre o variante
+    const filtered = productos.filter(p => 
+        p.name.toLowerCase().includes(term) || 
+        p.variants.toLowerCase().includes(term)
+    );
+
+    if (filtered.length === 0) {
+        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: #888; font-size: 0.9rem;">No se encontraron resultados.</li>';
+        return;
+    }
+
+    // Crea el HTML (Fotito cuadrada + Título + Variantes abajo gris)
+    filtered.forEach(producto => {
+        const li = document.createElement('li');
+        li.className = 'search-result-item';
+        
+        // Al tocar un resultado, cierra el buscador y abre el modal grande
+        li.onclick = () => {
+            searchDropdown.classList.remove('active');
+            openModal(producto.id);
+        };
+
+        li.innerHTML = `
+            <img src="${producto.image}" alt="${producto.name}" class="search-result-img">
+            <div class="search-result-info">
+                <span class="search-result-title">${producto.name}</span>
+                <span class="search-result-variants">${producto.variants}</span>
+            </div>
+        `;
+        searchResultsContainer.appendChild(li);
+    });
+}
+
+// Ocultar buscador si se hace clic afuera
+document.addEventListener('click', (e) => {
+    if (!searchTrigger.contains(e.target) && !searchDropdown.contains(e.target)) {
+        searchDropdown.classList.remove('active');
+    }
+});
+
 // --- LÓGICA DEL MODAL ---
 const modal = document.getElementById('product-modal');
 const closeModalBtn = document.getElementById('close-modal');
-
 const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-desc');
@@ -139,7 +207,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-            scrollObserver.unobserve(entry.target); // Solo se anima la primera vez
+            scrollObserver.unobserve(entry.target); 
         }
     });
 }, {
