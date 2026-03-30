@@ -47,7 +47,7 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- SLIDER LOGIC CON EFECTO SLIDE Y 10 SEGUNDOS ---
+// --- SLIDER LOGIC ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -62,14 +62,14 @@ function showSlide(index) {
         currentSlide = index;
     }
     
-    // Mueve el carril a la izquierda dependiendo del slide actual
+    // Mover el carril usando transform translateX
     sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
-// Intervalo de 10 segundos (10000 ms)
+// Autoplay slider (cada 10 segundos)
 setInterval(nextSlide, 10000);
 
 // --- RENDERIZAR PRODUCTOS EN GRILLA ---
