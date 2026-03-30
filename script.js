@@ -2,7 +2,7 @@
 const productos = [
     {
         id: 1,
-        name: "Mesa de comedor de madera maciza",
+        name: "Mesa de comedor maciza",
         price: 180000,
         variants: "Roble, Petiribí, Nogal",
         description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas.",
@@ -47,7 +47,7 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- SLIDER LOGIC ---
+// --- SLIDER LOGIC CON EFECTO SLIDE Y 10 SEGUNDOS ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -61,15 +61,11 @@ function showSlide(index) {
     } else {
         currentSlide = index;
     }
-    
-    // Mover el carril usando transform translateX
     sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
-
-// Autoplay slider (cada 10 segundos)
 setInterval(nextSlide, 10000);
 
 // --- RENDERIZAR PRODUCTOS EN GRILLA ---
@@ -86,8 +82,7 @@ const renderProducts = () => {
             <div class="card-img-wrapper">
                 <img src="${producto.image}" alt="${producto.name}" loading="lazy">
                 <div class="card-overlay">
-                    <button class="btn-ver-mas">Ver detalles</button>
-                </div>
+                    <button class="btn-ver-mas">Ver Prenda</button> </div>
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
@@ -210,7 +205,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.15,
+    threshold: 0.1, /* Reducido para que la animacion empiece apenas toca la pantalla */
     rootMargin: "0px 0px -50px 0px"
 });
 
