@@ -48,7 +48,17 @@ ul {
 .section {
     padding: 5rem 0;
 }
+.btn-ml-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
+.btn-ml-flex img {
+    height: 20px;
+    width: auto;
+}
 .bg-beige {
     background-color: var(--bg-beige);
 }
