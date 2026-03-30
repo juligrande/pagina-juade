@@ -2,7 +2,7 @@
 const productos = [
     {
         id: 1,
-        name: "Mesa de comedor maciza",
+        name: "Mesa de Comedor Maciza",
         price: 180000,
         variants: "Roble, Petiribí, Nogal",
         description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas.",
@@ -11,7 +11,7 @@ const productos = [
     },
     {
         id: 2,
-        name: "Estante flotante minimalista",
+        name: "Estante Flotante",
         price: 25000,
         variants: "Natural, Blanco, Negro",
         description: "Estante moderno de líneas limpias, ideal para decoración y organización en salas de estar, dormitorios o recibidores. Sistema de anclaje invisible de alta resistencia incluido.",
@@ -20,7 +20,7 @@ const productos = [
     },
     {
         id: 3,
-        name: "Escritorio de madera natural",
+        name: "Escritorio Office S26",
         price: 95000,
         variants: "Paraíso, Guatambú",
         description: "Escritorio amplio con acabado natural y estructura firme, perfecto para home office o estudios. Diseño ergonómico pensado para la comodidad durante largas horas de trabajo.",
@@ -29,7 +29,7 @@ const productos = [
     },
     {
         id: 4,
-        name: "Banco rústico de madera",
+        name: "Banco Rústico Vintage",
         price: 40000,
         variants: "Rústico, Barnizado",
         description: "Banco artesanal con estilo rústico, resistente y elegante. Ensamblado a mano con técnicas tradicionales de carpintería que garantizan su durabilidad a través del tiempo.",
@@ -47,7 +47,7 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- SLIDER LOGIC CON EFECTO SLIDE Y 10 SEGUNDOS ---
+// --- SLIDER LOGIC ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -82,7 +82,8 @@ const renderProducts = () => {
             <div class="card-img-wrapper">
                 <img src="${producto.image}" alt="${producto.name}" loading="lazy">
                 <div class="card-overlay">
-                    <button class="btn-ver-mas">Ver Prenda</button> </div>
+                    <button class="btn-ver-mas">Ver Detalles</button>
+                </div>
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
@@ -205,7 +206,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.1, /* Reducido para que la animacion empiece apenas toca la pantalla */
+    threshold: 0.1,
     rootMargin: "0px 0px -50px 0px"
 });
 

@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,7 +22,7 @@
                     <li><a href="#inicio">Inicio</a></li>
                     
                     <li class="dropdown-item">
-                        <a href="#productos">Productos <span style="font-size: 0.7rem; margin-left: 2px;">▼</span></a>
+                        <a href="#productos">Productos <span style="font-size: 0.6rem; margin-left: 2px;">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Categorías</h4>
@@ -70,8 +70,8 @@
                 <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=2000&auto=format&fit=crop');">
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
-                        <h1>Nuestros Más Vendidos</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Catálogo</button>
+                        <h1>Última Colección</h1>
+                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
                 
@@ -79,7 +79,7 @@
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
                         <h1>Diseños Exclusivos</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Catálogo</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
 
@@ -90,15 +90,12 @@
         <button class="slider-btn next" aria-label="Siguiente" onclick="nextSlide()">&#10095;</button>
     </section>
 
-    <div class="promo-banner fade-in">
-        <div class="container text-center">
-            <h2 class="promo-text">Envío <span class="badge">Gratis</span> en compras superiores a $100.000</h2>
-        </div>
+    <div class="promo-banner">
+        <h2 class="promo-text">Envío <span class="badge">Gratis</span> llevando 2 o más productos</h2>
     </div>
 
     <main id="productos" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Últimos Lanzamientos</h2>
             <div id="products-grid" class="grid fade-in"></div>
         </div>
     </main>
@@ -123,7 +120,7 @@
         </div>
     </dialog>
 
-    <section id="contacto" class="section bg-beige">
+    <section id="contacto" class="section bg-beige" style="margin-top: 4rem;">
         <div class="container text-center fade-in">
             <h2 class="section-title">¿Querés un producto personalizado?</h2>
             <p class="contact-text">Escribinos y lo hacemos realidad.</p>
