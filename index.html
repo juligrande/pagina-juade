@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYNCRO CNC | Productos en madera MDF</title>
-    <meta name="description" content="Muebles de madera que transforman tu espacio. Calidad premium y diseño exclusivo.">
+    <meta name="description" content="Muebles y accesorios de madera MDF. Calidad premium y diseño exclusivo con tecnología CNC.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,28 +16,23 @@
 
     <header class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">SYNCRO CNC</a>
+            <a href="#" class="logo-link">
+                <img src="logo.png" alt="SYNCRO CNC" class="logo-img" onerror="this.outerHTML='<span class=\'logo\'>SYNCRO CNC</span>'">
+            </a>
+            
             <nav>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     
                     <li class="dropdown-item">
-                        <a href="#lanzamientos">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
+                        <a href="#catalogo">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Colección</h4>
                                 <ul>
-                                    <li><a href="#lanzamientos">Mesas de Comedor</a></li>
-                                    <li><a href="#lanzamientos">Estanterías</a></li>
-                                    <li><a href="#lanzamientos">Escritorios</a></li>
-                                    <li><a href="#lanzamientos">Accesorios MDF</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>Destacados</h4>
-                                <ul>
-                                    <li><a href="#lanzamientos">Novedades</a></li>
-                                    <li><a href="#mas-vendidos">Los Más Vendidos</a></li>
+                                    <li><a href="#catalogo">Separadores</a></li>
+                                    <li><a href="#catalogo">Porta Llaves</a></li>
+                                    <li><a href="#catalogo">Organizadores</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -68,7 +63,7 @@
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
                         <h1>Diseños en MDF</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
                 
@@ -76,7 +71,7 @@
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
                         <h1>Cortes de Precisión</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
 
@@ -88,16 +83,15 @@
     </section>
 
     <div class="promo-banner fade-in">
-        <p class="promo-text">Hecho a <span class="badge">mano</span> en madera MDF</p>
+        <p class="promo-text">Hecho a <span class="badge">mano</span> con precisión CNC</p>
     </div>
 
-    <main id="lanzamientos" class="section first-section">
+    <main id="catalogo" class="section first-section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Últimos Lanzamientos</h2>
-                <a href="#" class="view-all">Ver todo →</a>
+                <h2 class="section-title">Nuestro Catálogo</h2>
             </div>
-            <div id="grid-lanzamientos" class="grid fade-in"></div>
+            <div id="grid-productos" class="grid fade-in"></div>
         </div>
     </main>
 
@@ -111,16 +105,7 @@
         </div>
     </section>
 
-    <section id="mas-vendidos" class="section bg-cream">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Los Más Vendidos</h2>
-            </div>
-            <div id="grid-vendidos" class="grid fade-in"></div>
-        </div>
-    </section>
-
-    <section id="contacto" class="section bg-cream" style="padding-top: 0;">
+    <section id="contacto" class="section bg-cream">
         <div class="container fade-in">
             <div class="contact-card">
                 <h2>¿Buscás un diseño especial?</h2>
@@ -159,14 +144,14 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo" style="color: var(--bg-cream);">SYNCRO CNC</a>
+                <img src="logo.png" alt="SYNCRO CNC" class="footer-logo-img" onerror="this.outerHTML='<span class=\'logo\' style=\'color: var(--color-crema);\'>SYNCRO CNC</span>'">
                 <p class="footer-text mt-2">Tecnología CNC y cortes en MDF. Diseñado y fabricado en Buenos Aires.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-col">
                     <h4>Sitio</h4>
                     <ul>
-                        <li><a href="#lanzamientos">Productos</a></li>
+                        <li><a href="#catalogo">Catálogo</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>

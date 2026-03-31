@@ -10,7 +10,7 @@
     /* Asignación funcional */
     --bg-white: #ffffff;
     --bg-cream: var(--color-crema); 
-    --bg-gray: #f5f5f5; /* Un gris muy neutro para fondos de imagenes */
+    --bg-gray: #f5f5f5; 
     
     /* Textos oscuros para contraste sobre crema/beige */
     --text-main: #2b2218; 
@@ -25,7 +25,7 @@
     --radius-md: 16px;
     --radius-lg: 24px;
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --shadow-soft: 0 12px 40px rgba(133, 106, 72, 0.15); /* Sombra con un toque marrón */
+    --shadow-soft: 0 12px 40px rgba(133, 106, 72, 0.15); 
     --shadow-hover: 0 20px 50px rgba(133, 106, 72, 0.25);
 }
 
@@ -53,6 +53,11 @@ ul { list-style: none; }
 /* Tipografía Elegante y Monospaced */
 h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
 .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.05em; color: var(--color-marron); }
+
+/* --- ESTILOS DE LOGO IMAGEN --- */
+.logo-link { display: flex; align-items: center; }
+.logo-img { max-height: 45px; width: auto; object-fit: contain; }
+.footer-logo-img { max-height: 55px; width: auto; margin-bottom: 1rem; }
 
 /* --- NAVBAR (GLASSMORPHISM) --- */
 .navbar { 
@@ -82,7 +87,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
     padding: 1.5rem; box-shadow: var(--shadow-hover); border: 1px solid rgba(133, 106, 72, 0.1);
     opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition-smooth); 
 }
-.dropdown-menu { display: flex; gap: 3rem; min-width: 380px; }
+.dropdown-menu { display: flex; gap: 3rem; min-width: 250px; }
 .dropdown-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .search-dropdown { width: 350px; right: 0; left: auto; padding: 0; overflow: hidden;}
 .search-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -123,7 +128,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
     position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
 }
 
-.slide-overlay { position: absolute; inset: 0; background: rgba(43, 34, 24, 0.5); } /* Overlay más cálido oscuro */
+.slide-overlay { position: absolute; inset: 0; background: rgba(43, 34, 24, 0.5); }
 
 .hero-content {
     position: relative; z-index: 1; color: var(--bg-white);
@@ -148,7 +153,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
 /* --- BOTONES GLOBALES --- */
 .btn { 
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 0.8rem 2rem; border-radius: 8px; /* Bordes menos redondos para el aspecto CNC */
+    padding: 0.8rem 2rem; border-radius: 8px; 
     font-size: 0.95rem; font-weight: 600; 
     cursor: pointer; transition: var(--transition-smooth); border: none; 
     font-family: 'Cascadia Code', monospace;
@@ -175,10 +180,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
     gap: 12px;
     transition: var(--transition-smooth);
 }
-.btn-ml:hover { 
-    background-color: #F0D800; 
-    transform: translateY(-2px); 
-}
+.btn-ml:hover { background-color: #F0D800; transform: translateY(-2px); }
 
 /* --- PROMO BANNER --- */
 .promo-banner { padding: 2rem 0; text-align: center; background-color: var(--color-verde-claro-1); }
@@ -232,7 +234,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
     display: flex; align-items: center; justify-content: center; text-align: center;
 }
 .exclusive-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-attachment: fixed; }
-.exclusive-overlay { position: absolute; inset: 0; background: rgba(133, 106, 72, 0.7); } /* Overlay en tono marrón */
+.exclusive-overlay { position: absolute; inset: 0; background: rgba(133, 106, 72, 0.7); }
 .exclusive-content { position: relative; z-index: 1; color: var(--color-crema); display: flex; flex-direction: column; align-items: center; gap: 1.5rem; max-width: 600px; }
 .exclusive-content h2 { font-size: 2.8rem; font-weight: 700; margin: 0; }
 .exclusive-content p { font-size: 1.1rem; opacity: 0.9; font-weight: 400; margin-bottom: 0.5rem;}
@@ -248,7 +250,7 @@ h1, h2, h3, h4, .logo { font-weight: 700; letter-spacing: -0.02em; }
 .contact-card h2 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--color-marron); }
 .contact-card p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
 
-/* --- MODAL (TIPO E-COMMERCE REAL) --- */
+/* --- MODAL --- */
 .modal { 
     margin: auto; border: none; border-radius: var(--radius-lg); 
     background: var(--bg-white); max-width: 1000px; width: 95%; max-height: 90vh; 
