@@ -2,73 +2,73 @@
 const productos = [
     {
         id: 1,
-        name: "Mesa de Comedor Maciza",
+        name: "Producto 1",
         price: 180000,
-        variants: "Roble, Petiribí, Nogal",
-        description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas. Fabricación artesanal.",
+        variants: "1, 2, 3",
+        description: "Producto 1",
         image: "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
     },
     {
         id: 2,
-        name: "Estante Flotante Minimal",
+        name: "Producto 2",
         price: 25000,
-        variants: "Natural, Blanco, Negro",
-        description: "Líneas limpias y fijación invisible. Ideal para aportar calidez a cualquier ambiente sin sobrecargar el espacio visual. Soporta hasta 15kg.",
+        variants: "asd, 2, 3",
+        description: "Producto 2",
         image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
         id: 3,
-        name: "Escritorio Office Elegance",
+        name: "Producto 3",
         price: 95000,
-        variants: "Paraíso, Guatambú",
-        description: "Diseñado para la productividad. Superficie amplia con tratamiento antimanchas y pasacables oculto integrado. El equilibrio perfecto entre función y estética.",
+        variants: "1, 2",
+        description: "Producto 3",
         image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
     },
     {
         id: 4,
-        name: "Banco Rústico Heritage",
+        name: "Producto 4",
         price: 40000,
-        variants: "Rústico, Barnizado",
-        description: "Pieza de acento fabricada con maderas recuperadas. Cada banco cuenta una historia única a través de sus vetas y texturas irregulares.",
+        variants: "1, 2",
+        description: "Producto 4.",
         image: "https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
     },
     {
         id: 5,
-        name: "Silla Nórdica Curva",
+        name: "Producto 5",
         price: 35000,
-        variants: "Haya, Fresno",
-        description: "Silla de diseño escandinavo con respaldo curvo al vapor. Ergonomía excepcional combinada con una silueta ligera y atemporal.",
+        variants: "1, 2",
+        description: "Producto 5",
         image: "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
     },
     {
         id: 6,
-        name: "Mesa Ratona Industrial",
+        name: "Producto 6",
         price: 55000,
-        variants: "Roble Oscuro, Natural",
-        description: "Contraste perfecto entre el hierro forjado a mano y la calidez del roble macizo. El centro de atención para tu sala de estar.",
+        variants: "1, 2",
+        description: "Producto 6",
         image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
     },
     {
         id: 7,
-        name: "Perchero de Pie Premium",
+        name: "Producto 7",
         price: 28000,
-        variants: "Nogal, Paraíso",
-        description: "Escultura funcional. Perchero minimalista torneado a partir de un solo bloque de madera. Estabilidad garantizada por su base pesada.",
+        variants: "1, 2",
+        description: "Producto 7",
         image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
     },
     {
         id: 8,
-        name: "Biblioteca Geométrica",
+        name: "Producto 8",
         price: 120000,
-        variants: "Cruda, Barnizada",
-        description: "Juego de proporciones y espacios vacíos. Una estantería de diseño asimétrico que actúa como separador de ambientes o pieza central.",
+        variants: "1, 2",
+        description: "Producto 8",
         image: "https://images.unsplash.com/photo-1594620302200-9a762244a156?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
     }
