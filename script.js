@@ -1,76 +1,32 @@
 // --- DATOS DE PRODUCTOS ---
+// Actualizado con los 3 productos iniciales y placeholder images
 const productos = [
     {
         id: 1,
-        name: "Producto 1",
-        price: 180000,
-        variants: "1, 2, 3",
-        description: "Producto 1",
-        image: "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
+        name: "Separadores de Libros",
+        price: 8750,
+        variants: "MDF Natural",
+        description: "Prácticos y elegantes separadores de libros cortados en MDF con tecnología CNC. Perfectos para organizar tu biblioteca con un estilo minimalista.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        link: "#"
     },
     {
         id: 2,
-        name: "Producto 2",
-        price: 25000,
-        variants: "asd, 2, 3",
-        description: "Producto 2",
-        image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
+        name: "Porta Llaves",
+        price: 22500,
+        variants: "MDF Natural / Grabado",
+        description: "Porta llaves de pared con diseño moderno y cortes de precisión. Mantené tus llaves organizadas y dale un toque especial a la entrada de tu hogar.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        link: "#"
     },
     {
         id: 3,
-        name: "Producto 3",
-        price: 95000,
-        variants: "1, 2",
-        description: "Producto 3",
-        image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
-    },
-    {
-        id: 4,
-        name: "Producto 4",
-        price: 40000,
-        variants: "1, 2",
-        description: "Producto 4.",
-        image: "https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
-    },
-    {
-        id: 5,
-        name: "Producto 5",
-        price: 35000,
-        variants: "1, 2",
-        description: "Producto 5",
-        image: "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
-    },
-    {
-        id: 6,
-        name: "Producto 6",
-        price: 55000,
-        variants: "1, 2",
-        description: "Producto 6",
-        image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
-    },
-    {
-        id: 7,
-        name: "Producto 7",
-        price: 28000,
-        variants: "1, 2",
-        description: "Producto 7",
-        image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
-    },
-    {
-        id: 8,
-        name: "Producto 8",
-        price: 120000,
-        variants: "1, 2",
-        description: "Producto 8",
-        image: "https://images.unsplash.com/photo-1594620302200-9a762244a156?q=80&w=1000&auto=format&fit=crop",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
+        name: "Organizador de Cables",
+        price: 12500,
+        variants: "MDF Natural",
+        description: "Solución ideal para mantener tu escritorio libre de cables enredados. Corte preciso en MDF para un ensamble perfecto y una estación de trabajo limpia.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        link: "#"
     }
 ];
 
@@ -138,7 +94,7 @@ const renderGrid = (listaProductos, containerId) => {
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
-                <p class="card-price">${formatPrice(producto.price)} USD</p>
+                <p class="card-price">${formatPrice(producto.price)}</p>
             </div>
         `;
         
@@ -265,12 +221,8 @@ const scrollObserver = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Repartimos los productos
-    const ultimosLanzamientos = productos.slice(0, 4);
-    const masVendidos = productos.slice(4, 8); 
-    
-    renderGrid(ultimosLanzamientos, 'grid-lanzamientos');
-    renderGrid(masVendidos, 'grid-vendidos');
+    // Renderizamos los 3 productos en el contenedor único de catálogo
+    renderGrid(productos, 'grid-productos');
     
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
