@@ -1,49 +1,47 @@
-// --- DATOS DE PRODUCTOS (Ahora son 8 para llenar la página) ---
+// --- DATOS DE PRODUCTOS ---
 const productos = [
-    // Primeros 4 para Últimos Lanzamientos
     {
         id: 1,
         name: "Mesa de Comedor Maciza",
         price: 180000,
         variants: "Roble, Petiribí, Nogal",
-        description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas.",
+        description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas. Fabricación artesanal.",
         image: "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
     },
     {
         id: 2,
-        name: "Estante Flotante",
+        name: "Estante Flotante Minimal",
         price: 25000,
         variants: "Natural, Blanco, Negro",
-        description: "Estante moderno de líneas limpias, ideal para decoración y organización en salas de estar, dormitorios o recibidores. Sistema de anclaje invisible de alta resistencia incluido.",
+        description: "Líneas limpias y fijación invisible. Ideal para aportar calidez a cualquier ambiente sin sobrecargar el espacio visual. Soporta hasta 15kg.",
         image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
         id: 3,
-        name: "Escritorio Office S26",
+        name: "Escritorio Office Elegance",
         price: 95000,
         variants: "Paraíso, Guatambú",
-        description: "Escritorio amplio con acabado natural y estructura firme, perfecto para home office o estudios. Diseño ergonómico pensado para la comodidad durante largas horas de trabajo.",
+        description: "Diseñado para la productividad. Superficie amplia con tratamiento antimanchas y pasacables oculto integrado. El equilibrio perfecto entre función y estética.",
         image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
     },
     {
         id: 4,
-        name: "Banco Rústico Vintage",
+        name: "Banco Rústico Heritage",
         price: 40000,
         variants: "Rústico, Barnizado",
-        description: "Banco artesanal con estilo rústico, resistente y elegante. Ensamblado a mano con técnicas tradicionales de carpintería que garantizan su durabilidad a través del tiempo.",
+        description: "Pieza de acento fabricada con maderas recuperadas. Cada banco cuenta una historia única a través de sus vetas y texturas irregulares.",
         image: "https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
     },
-    // Siguientes 4 para Los Más Vendidos
     {
         id: 5,
         name: "Silla Nórdica Curva",
         price: 35000,
         variants: "Haya, Fresno",
-        description: "Silla de diseño nórdico con respaldo curvo para mayor ergonomía. Fabricada en madera torneada de alta resistencia.",
+        description: "Silla de diseño escandinavo con respaldo curvo al vapor. Ergonomía excepcional combinada con una silueta ligera y atemporal.",
         image: "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
     },
@@ -52,7 +50,7 @@ const productos = [
         name: "Mesa Ratona Industrial",
         price: 55000,
         variants: "Roble Oscuro, Natural",
-        description: "Mesa de centro que combina madera maciza con patas de hierro negro. Un toque industrial y cálido para tu living.",
+        description: "Contraste perfecto entre el hierro forjado a mano y la calidez del roble macizo. El centro de atención para tu sala de estar.",
         image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
     },
@@ -61,7 +59,7 @@ const productos = [
         name: "Perchero de Pie Premium",
         price: 28000,
         variants: "Nogal, Paraíso",
-        description: "Perchero minimalista de madera maciza. Excelente estabilidad y diseño que se adapta a cualquier rincón de tu casa.",
+        description: "Escultura funcional. Perchero minimalista torneado a partir de un solo bloque de madera. Estabilidad garantizada por su base pesada.",
         image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
     },
@@ -70,7 +68,7 @@ const productos = [
         name: "Biblioteca Geométrica",
         price: 120000,
         variants: "Cruda, Barnizada",
-        description: "Biblioteca de diseño asimétrico para exhibir libros y decoración. Amplio espacio de guardado y estructura súper firme.",
+        description: "Juego de proporciones y espacios vacíos. Una estantería de diseño asimétrico que actúa como separador de ambientes o pieza central.",
         image: "https://images.unsplash.com/photo-1594620302200-9a762244a156?q=80&w=1000&auto=format&fit=crop",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
     }
@@ -85,29 +83,17 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- SLIDER LOGIC ---
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const sliderTrack = document.getElementById('slider-track');
-const totalSlides = slides.length;
-
-function showSlide(index) {
-    if (index >= totalSlides) {
-        currentSlide = 0;
-    } else if (index < 0) {
-        currentSlide = totalSlides - 1;
+// --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
     } else {
-        currentSlide = index;
+        nav.classList.remove('scrolled');
     }
-    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-}
+});
 
-function nextSlide() { showSlide(currentSlide + 1); }
-function prevSlide() { showSlide(currentSlide - 1); }
-setInterval(nextSlide, 10000);
-
-// --- RENDERIZAR PRODUCTOS EN GRILLAS SEPARADAS ---
-// Creamos una funcion que recibe la lista de productos y el ID del contenedor
+// --- RENDERIZAR PRODUCTOS EN GRILLAS ---
 const renderGrid = (listaProductos, containerId) => {
     const grid = document.getElementById(containerId);
     if(!grid) return;
@@ -123,7 +109,7 @@ const renderGrid = (listaProductos, containerId) => {
             <div class="card-img-wrapper">
                 <img src="${producto.image}" alt="${producto.name}" loading="lazy">
                 <div class="card-overlay">
-                    <button class="btn-ver-mas">Ver Detalles</button>
+                    <button class="btn-quickview">Ver Detalles</button>
                 </div>
             </div>
             <div class="card-body">
@@ -255,9 +241,9 @@ const scrollObserver = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Repartimos los productos en las dos grillas
-    const ultimosLanzamientos = productos.slice(0, 4); // Los primeros 4
-    const masVendidos = productos.slice(4, 8); // Los ultimos 4
+    // Repartimos los productos
+    const ultimosLanzamientos = productos.slice(0, 4);
+    const masVendidos = productos.slice(4, 8); 
     
     renderGrid(ultimosLanzamientos, 'grid-lanzamientos');
     renderGrid(masVendidos, 'grid-vendidos');
