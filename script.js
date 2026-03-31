@@ -2,30 +2,40 @@
 const productos = [
     {
         id: 1,
-        name: "Separadores de Libros",
-        price: 8750,
-        variants: "MDF Natural",
-        description: "Prácticos y elegantes separadores de libros cortados en MDF con tecnología CNC. Perfectos para organizar tu biblioteca con un estilo minimalista.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", 
-        link: "#"
+        name: "Mesa de Comedor Maciza",
+        price: 180000,
+        variants: "Roble, Petiribí, Nogal",
+        description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas. Fabricación artesanal.",
+        // Usando placeholders con la paleta de colores para que se vea bien
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Mesa+Maciza", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
     },
     {
         id: 2,
-        name: "Porta Llaves",
-        price: 22500,
-        variants: "MDF Natural / Grabado",
-        description: "Porta llaves de pared con diseño moderno y cortes de precisión. Mantené tus llaves organizadas y dale un toque especial a la entrada de tu hogar.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto",
-        link: "#"
+        name: "Estante Flotante Minimal",
+        price: 25000,
+        variants: "Natural, Blanco, Negro",
+        description: "Líneas limpias y fijación invisible. Ideal para aportar calidez a cualquier ambiente sin sobrecargar el espacio visual. Soporta hasta 15kg.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Estante",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
         id: 3,
-        name: "Organizador de Cables",
-        price: 12500,
-        variants: "MDF Natural",
-        description: "Solución ideal para mantener tu escritorio libre de cables enredados. Corte preciso en MDF para un ensamble perfecto y una estación de trabajo limpia.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", 
-        link: "#"
+        name: "Escritorio Office Elegance",
+        price: 95000,
+        variants: "Paraíso, Guatambú",
+        description: "Diseñado para la productividad. Superficie amplia con tratamiento antimanchas y pasacables oculto integrado. El equilibrio perfecto entre función y estética.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Escritorio", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
+    },
+    {
+        id: 4,
+        name: "Banco Rústico Heritage",
+        price: 40000,
+        variants: "Rústico, Barnizado",
+        description: "Pieza de acento fabricada con maderas recuperadas. Cada banco cuenta una historia única a través de sus vetas y texturas irregulares.",
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Banco", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
     }
 ];
 
@@ -38,7 +48,7 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- EFECTO NAVBAR SCROLL ---
+// --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (window.scrollY > 10) {
@@ -48,7 +58,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// --- LÓGICA DEL SLIDER ---
+// --- LÓGICA DEL SLIDER (Deslizamiento Horizontal Automático) ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -62,12 +72,14 @@ function showSlide(index) {
     } else {
         currentSlide = index;
     }
+    // Desliza el carril a la izquierda
     sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
+// Auto avance cada 10 segundos
 setInterval(nextSlide, 10000);
 
 // --- RENDERIZAR PRODUCTOS EN GRILLA ÚNICA ---
@@ -91,7 +103,7 @@ const renderGrid = (listaProductos, containerId) => {
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
-                <p class="card-price">${formatPrice(producto.price)}</p>
+                <p class="card-price">${formatPrice(producto.price)} USD</p>
             </div>
         `;
         
@@ -128,7 +140,7 @@ function renderSearchResults(query) {
     );
 
     if (filtered.length === 0) {
-        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: var(--separator); font-size: 0.9rem;">No se encontraron resultados.</li>';
+        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: #856A48; font-size: 0.9rem;">No se encontraron resultados.</li>';
         return;
     }
 
@@ -179,16 +191,17 @@ window.openModal = (id) => {
     modalLink.href = producto.link;
 
     modal.showModal();
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden'; // Prevenir scroll de fondo
 };
 
 const closeModal = () => {
     modal.close();
-    document.body.style.overflow = 'auto'; 
+    document.body.style.overflow = 'auto'; // Restaurar scroll
 };
 
 closeModalBtn.addEventListener('click', closeModal);
 
+// Cerrar al clickear en el backdrop
 modal.addEventListener('click', (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
@@ -201,26 +214,27 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// --- ANIMACIONES ON SCROLL ---
+// --- ANIMACIONES ON SCROLL (Intersection Observer) ---
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-            scrollObserver.unobserve(entry.target); 
+            scrollObserver.unobserve(entry.target); // Dejar de observar después de la animación
         }
     });
 }, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
+    threshold: 0.1, // Activar cuando el 10% sea visible
+    rootMargin: "0px 0px -50px 0px" // Un pequeño margen
 });
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Renderizamos los 3 productos
-    renderGrid(productos, 'grid-productos');
+    // Renderizamos los productos en el contenedor unificado
+    renderGrid(productos, 'products-grid');
     
+    // Observar elementos para animar
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 });

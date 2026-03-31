@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNCRO CNC | Productos en madera MDF</title>
-    <meta name="description" content="Muebles y accesorios de madera MDF. Calidad premium y diseño exclusivo con tecnología CNC.">
+    <title>Juade6767 | Diseño Premium en Madera</title>
+    <meta name="description" content="Muebles de madera que transforman tu espacio. Calidad premium y diseño exclusivo.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,23 +16,28 @@
 
     <header class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo-link">
-                <img src="logo.png" alt="SYNCRO CNC" class="logo-img" onerror="this.outerHTML='<span class=\'logo\'>SYNCRO CNC</span>'">
-            </a>
-            
+            <a href="#" class="logo">Juade6767.</a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     
                     <li class="dropdown-item">
-                        <a href="#catalogo">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
+                        <a href="#productos">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Colección</h4>
                                 <ul>
-                                    <li><a href="#catalogo">Separadores</a></li>
-                                    <li><a href="#catalogo">Porta Llaves</a></li>
-                                    <li><a href="#catalogo">Organizadores</a></li>
+                                    <li><a href="#productos">Mesas de Comedor</a></li>
+                                    <li><a href="#productos">Estanterías</a></li>
+                                    <li><a href="#productos">Escritorios</a></li>
+                                    <li><a href="#productos">Bancos y Sillas</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Filtros</h4>
+                                <ul>
+                                    <li><a href="#productos">Novedades</a></li>
+                                    <li><a href="#productos">Los Más Vendidos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -43,7 +48,7 @@
                         <div class="search-dropdown" id="search-dropdown">
                             <div class="search-input-wrapper">
                                 <span class="search-icon">⌕</span>
-                                <input type="text" id="search-input" placeholder="Buscar por producto...">
+                                <input type="text" id="search-input" placeholder="Buscar por producto o madera...">
                             </div>
                             <ul class="search-results" id="search-results"></ul>
                         </div>
@@ -62,16 +67,16 @@
                 <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=2000&auto=format&fit=crop');">
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
-                        <h1>Diseños en MDF</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <h1>Mobiliario de Autor</h1>
+                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
                 
                 <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2000&auto=format&fit=crop');">
                     <div class="slide-overlay"></div>
                     <div class="container hero-content fade-in">
-                        <h1>Cortes de Precisión</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                        <h1>Diseños Exclusivos</h1>
+                        <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
                     </div>
                 </div>
 
@@ -83,37 +88,18 @@
     </section>
 
     <div class="promo-banner fade-in">
-        <p class="promo-text">Hecho a <span class="badge">mano</span> con precisión CNC</p>
+        <p class="promo-text">Envío <span class="badge" style="background-color: #e63946; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; margin: 0 4px;">Gratis</span> llevando 2 o más productos</p>
     </div>
 
-    <main id="catalogo" class="section first-section">
+    <main id="productos" class="section first-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Nuestro Catálogo</h2>
+                <a href="#" class="view-all">Ver todo →</a>
             </div>
-            <div id="grid-productos" class="grid fade-in"></div>
+            <div id="products-grid" class="grid fade-in"></div>
         </div>
     </main>
-
-    <section class="exclusive-banner fade-in">
-        <div class="exclusive-bg" style="background-image: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=2000&auto=format&fit=crop');"></div>
-        <div class="exclusive-overlay"></div>
-        <div class="container exclusive-content">
-            <h2>Cortes a Medida</h2>
-            <p>Realizamos trabajos personalizados con tecnología CNC para garantizar la máxima precisión en cada detalle.</p>
-            <button class="btn btn-primary">Cotizar Proyecto</button>
-        </div>
-    </section>
-
-    <section id="contacto" class="section">
-        <div class="container fade-in">
-            <div class="contact-card">
-                <h2>¿Buscás un diseño especial?</h2>
-                <p>Nuestro equipo está listo para materializar tus ideas. Contanos qué necesitás cortar o grabar en MDF.</p>
-                <a href="mailto:contacto@syncrocnc.com" class="btn btn-primary">Contactarnos</a>
-            </div>
-        </div>
-    </section>
 
     <dialog id="product-modal" class="modal">
         <div class="modal-content">
@@ -123,16 +109,16 @@
                     <img id="modal-img" src="" alt="Producto">
                 </div>
                 <div class="modal-info">
-                    <span class="modal-category">SYNCRO CNC MDF</span>
+                    <span class="modal-category">Premium Wood</span>
                     <h3 id="modal-title"></h3>
                     <p id="modal-price" class="modal-price"></p>
                     <div class="modal-divider"></div>
                     <p id="modal-desc" class="modal-description"></p>
                     
                     <div class="modal-actions">
-                        <a id="modal-link" href="#" target="_blank" class="btn-ml">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                            Comprar en MercadoLibre
+                        <a id="modal-link" href="#" target="_blank" class="btn-ml btn-ml-flex">
+                            <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.21.12/mercadolibre/logo__large_plus.png" alt="MercadoLibre">
+                            Ver en MercadoLibre
                         </a>
                         <p class="ml-guarantee">✓ Compra protegida y envío asegurado.</p>
                     </div>
@@ -141,17 +127,27 @@
         </div>
     </dialog>
 
+    <section id="contacto" class="section contacto-section">
+        <div class="container fade-in">
+            <div class="contact-card">
+                <h2>¿Buscás un diseño especial?</h2>
+                <p>Nuestros maestros carpinteros están listos para materializar tus ideas. Contanos sobre tu espacio.</p>
+                <a href="mailto:contacto@juade67.com" class="btn btn-dark">Iniciar Proyecto</a>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <img src="logo.png" alt="SYNCRO CNC" class="footer-logo-img" onerror="this.outerHTML='<span class=\'logo\'>SYNCRO CNC</span>'">
-                <p class="footer-text mt-2">Tecnología CNC y cortes en MDF. Diseñado y fabricado en Buenos Aires.</p>
+                <a href="#" class="logo" style="color: #fff;">Juade6767.</a>
+                <p class="footer-text mt-2">Tecnología CNC y artesanía premium en Buenos Aires.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-col">
                     <h4>Sitio</h4>
                     <ul>
-                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#productos">Catálogo</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
@@ -159,13 +155,13 @@
                     <h4>Redes</h4>
                     <ul>
                         <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Pinterest</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; <span id="current-year"></span> SYNCRO CNC. Todos los derechos reservados.</p>
+            <p>&copy; <span id="current-year"></span> Juade6767.</p>
         </div>
     </footer>
 
