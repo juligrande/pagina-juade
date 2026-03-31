@@ -1,36 +1,34 @@
 // --- DATOS DE PRODUCTOS ---
-// Actualizado con los 3 productos iniciales y placeholder images
+// Las imágenes de placeholder ahora usan BLANCO de fondo y MARRÓN de texto
+// para coincidir con la estética de las tarjetas blancas.
 const productos = [
     {
         id: 1,
         name: "Separadores de Libros",
         price: 8750,
-        variants: "MDF Natural",
-        description: "Prácticos y elegantes separadores de libros cortados en MDF con tecnología CNC. Perfectos para organizar tu biblioteca con un estilo minimalista.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
-        link: "#"
+        description: "Set de separadores minimalistas cortados con precisión láser. Ideales para amantes de la lectura que valoran el diseño sutil. Un detalle premium para tu biblioteca.",
+        image: "https://placehold.co/800x800/ffffff/856A48?text=Separadores", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1" 
     },
     {
         id: 2,
         name: "Porta Llaves",
         price: 22500,
-        variants: "MDF Natural / Grabado",
-        description: "Porta llaves de pared con diseño moderno y cortes de precisión. Mantené tus llaves organizadas y dale un toque especial a la entrada de tu hogar.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
-        link: "#"
+        description: "Organizador de entrada elegante y funcional. Mantené tus llaves en su lugar con una pieza de diseño geométrico que eleva la estética de cualquier recibidor.",
+        image: "https://placehold.co/800x800/ffffff/856A48?text=Porta+Llaves",
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
         id: 3,
         name: "Organizador de Cables",
         price: 12500,
-        variants: "MDF Natural",
-        description: "Solución ideal para mantener tu escritorio libre de cables enredados. Corte preciso en MDF para un ensamble perfecto y una estación de trabajo limpia.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
-        link: "#"
+        description: "La solución definitiva para un escritorio minimalista. Este bloque de MDF sujeta tus cables de carga evitando enredos, manteniendo tu espacio de trabajo impecable.",
+        image: "https://placehold.co/800x800/ffffff/856A48?text=Organizador", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
     }
 ];
 
-// --- UTILIDADES ---
+// --- FORMATO DE MONEDA ---
 const formatPrice = (price) => {
     return new Intl.NumberFormat('es-AR', {
         style: 'currency',
@@ -39,62 +37,38 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
+// --- NAVBAR EFECTO SCROLL ---
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 10) {
+    if (window.scrollY > 20) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
     }
 });
 
-// --- LÓGICA DEL SLIDER (Deslizamiento Horizontal Automático) ---
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const sliderTrack = document.getElementById('slider-track');
-const totalSlides = slides.length;
-
-function showSlide(index) {
-    if (index >= totalSlides) {
-        currentSlide = 0;
-    } else if (index < 0) {
-        currentSlide = totalSlides - 1;
-    } else {
-        currentSlide = index;
-    }
-    // Desliza el carril a la izquierda
-    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-}
-
-function nextSlide() { showSlide(currentSlide + 1); }
-function prevSlide() { showSlide(currentSlide - 1); }
-
-// Auto avance cada 10 segundos
-setInterval(nextSlide, 10000);
-
-// --- RENDERIZAR PRODUCTOS EN GRILLAS ---
-const renderGrid = (listaProductos, containerId) => {
-    const grid = document.getElementById(containerId);
+// --- RENDERIZAR PRODUCTOS EN EL DOM ---
+const renderProductos = () => {
+    const grid = document.getElementById('grid-productos');
     if(!grid) return;
     
     grid.innerHTML = '';
     
-    listaProductos.forEach(producto => {
+    productos.forEach((p, index) => {
         const card = document.createElement('article');
-        card.className = 'card';
-        card.onclick = () => openModal(producto.id);
+        card.className = 'card fade-in-up';
+        // Añadir un pequeño retraso a cada tarjeta para efecto cascada al scrollear
+        card.style.transitionDelay = `${index * 0.15}s`;
+        
+        card.onclick = () => openModal(p.id);
         
         card.innerHTML = `
             <div class="card-img-wrapper">
-                <img src="${producto.image}" alt="${producto.name}" loading="lazy">
-                <div class="card-overlay">
-                    <button class="btn-quickview">Ver Detalles</button>
-                </div>
+                <img src="${p.image}" alt="${p.name}" loading="lazy">
             </div>
-            <div class="card-body">
-                <h3 class="card-title">${producto.name}</h3>
-                <p class="card-price">${formatPrice(producto.price)}</p>
+            <div class="card-info">
+                <h3 class="card-title">${p.name}</h3>
+                <p class="card-price">${formatPrice(p.price)}</p>
             </div>
         `;
         
@@ -102,128 +76,72 @@ const renderGrid = (listaProductos, containerId) => {
     });
 };
 
-// --- LÓGICA DEL BUSCADOR ---
-const searchTrigger = document.getElementById('search-trigger');
-const searchDropdown = document.getElementById('search-dropdown');
-const searchInput = document.getElementById('search-input');
-const searchResultsContainer = document.getElementById('search-results');
-
-searchTrigger.addEventListener('click', (e) => {
-    e.preventDefault();
-    searchDropdown.classList.toggle('active');
-    if(searchDropdown.classList.contains('active')) {
-        searchInput.focus();
-        renderSearchResults(''); 
-    }
-});
-
-searchInput.addEventListener('input', (e) => {
-    renderSearchResults(e.target.value);
-});
-
-function renderSearchResults(query) {
-    searchResultsContainer.innerHTML = '';
-    const term = query.toLowerCase().trim();
-    
-    const filtered = productos.filter(p => 
-        p.name.toLowerCase().includes(term) || 
-        p.variants.toLowerCase().includes(term)
-    );
-
-    if (filtered.length === 0) {
-        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: #888; font-size: 0.9rem;">No se encontraron resultados.</li>';
-        return;
-    }
-
-    filtered.forEach(producto => {
-        const li = document.createElement('li');
-        li.className = 'search-result-item';
-        
-        li.onclick = () => {
-            searchDropdown.classList.remove('active');
-            openModal(producto.id);
-        };
-
-        li.innerHTML = `
-            <img src="${producto.image}" alt="${producto.name}" class="search-result-img">
-            <div class="search-result-info">
-                <span class="search-result-title">${producto.name}</span>
-                <span class="search-result-variants">${producto.variants}</span>
-            </div>
-        `;
-        searchResultsContainer.appendChild(li);
-    });
-}
-
-document.addEventListener('click', (e) => {
-    if (!searchTrigger.contains(e.target) && !searchDropdown.contains(e.target)) {
-        searchDropdown.classList.remove('active');
-    }
-});
-
 // --- LÓGICA DEL MODAL ---
 const modal = document.getElementById('product-modal');
 const closeModalBtn = document.getElementById('close-modal');
-const modalImg = document.getElementById('modal-img');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-desc');
-const modalPrice = document.getElementById('modal-price');
-const modalLink = document.getElementById('modal-link');
 
 window.openModal = (id) => {
-    const producto = productos.find(p => p.id === id);
-    if (!producto) return;
+    const p = productos.find(prod => prod.id === id);
+    if (!p) return;
 
-    modalImg.src = producto.image;
-    modalImg.alt = producto.name;
-    modalTitle.textContent = producto.name;
-    modalDesc.textContent = producto.description;
-    modalPrice.textContent = formatPrice(producto.price);
-    modalLink.href = producto.link;
+    // Rellenar datos
+    document.getElementById('modal-img').src = p.image;
+    document.getElementById('modal-title').textContent = p.name;
+    document.getElementById('modal-price').textContent = formatPrice(p.price);
+    document.getElementById('modal-desc').textContent = p.description;
+    document.getElementById('modal-link').href = p.link;
 
+    // Mostrar modal
     modal.showModal();
+    
+    // Bloquear scroll de la página de fondo para mayor inmersión
     document.body.style.overflow = 'hidden'; 
 };
 
 const closeModal = () => {
     modal.close();
-    document.body.style.overflow = 'auto'; 
+    // Restaurar scroll
+    document.body.style.overflow = 'auto';
 };
 
 closeModalBtn.addEventListener('click', closeModal);
 
+// Cerrar haciendo click en el fondo translúcido
 modal.addEventListener('click', (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
-        e.clientX < dialogDimensions.left ||
+        e.clientX < dialogDimensions.left || 
         e.clientX > dialogDimensions.right ||
-        e.clientY < dialogDimensions.top ||
+        e.clientY < dialogDimensions.top || 
         e.clientY > dialogDimensions.bottom
     ) {
         closeModal();
     }
 });
 
-// --- ANIMACIONES ON SCROLL ---
+// --- ANIMACIONES ON SCROLL (Observer) ---
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
+            // Deja de observar para que la animación ocurra solo 1 vez
             scrollObserver.unobserve(entry.target); 
         }
     });
 }, {
-    threshold: 0.1,
+    threshold: 0.15, 
     rootMargin: "0px 0px -50px 0px"
 });
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Actualizar año del footer automáticamente
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Renderizamos los 3 productos en el contenedor único de catálogo
-    renderGrid(productos, 'grid-productos');
+    // Generar las tarjetas
+    renderProductos();
     
-    const elementsToAnimate = document.querySelectorAll('.fade-in');
+    // Aplicar observador de animaciones a todos los elementos con la clase
+    const elementsToAnimate = document.querySelectorAll('.fade-in-up');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 });
