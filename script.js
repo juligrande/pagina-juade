@@ -1,5 +1,4 @@
 // --- DATOS DE PRODUCTOS ---
-// Actualizado con los 3 productos iniciales y placeholder images
 const productos = [
     {
         id: 1,
@@ -7,7 +6,7 @@ const productos = [
         price: 8750,
         variants: "MDF Natural",
         description: "Prácticos y elegantes separadores de libros cortados en MDF con tecnología CNC. Perfectos para organizar tu biblioteca con un estilo minimalista.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", 
         link: "#"
     },
     {
@@ -16,7 +15,7 @@ const productos = [
         price: 22500,
         variants: "MDF Natural / Grabado",
         description: "Porta llaves de pared con diseño moderno y cortes de precisión. Mantené tus llaves organizadas y dale un toque especial a la entrada de tu hogar.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto",
         link: "#"
     },
     {
@@ -25,7 +24,7 @@ const productos = [
         price: 12500,
         variants: "MDF Natural",
         description: "Solución ideal para mantener tu escritorio libre de cables enredados. Corte preciso en MDF para un ensamble perfecto y una estación de trabajo limpia.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", // Placeholder temporal
+        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Imagen+Pronto", 
         link: "#"
     }
 ];
@@ -39,7 +38,7 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
+// --- EFECTO NAVBAR SCROLL ---
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (window.scrollY > 10) {
@@ -49,7 +48,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// --- LÓGICA DEL SLIDER (Deslizamiento Horizontal Automático) ---
+// --- LÓGICA DEL SLIDER ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -63,17 +62,15 @@ function showSlide(index) {
     } else {
         currentSlide = index;
     }
-    // Desliza el carril a la izquierda
     sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
-// Auto avance cada 10 segundos
 setInterval(nextSlide, 10000);
 
-// --- RENDERIZAR PRODUCTOS EN GRILLAS ---
+// --- RENDERIZAR PRODUCTOS EN GRILLA ÚNICA ---
 const renderGrid = (listaProductos, containerId) => {
     const grid = document.getElementById(containerId);
     if(!grid) return;
@@ -131,7 +128,7 @@ function renderSearchResults(query) {
     );
 
     if (filtered.length === 0) {
-        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: #888; font-size: 0.9rem;">No se encontraron resultados.</li>';
+        searchResultsContainer.innerHTML = '<li style="padding: 15px; color: var(--separator); font-size: 0.9rem;">No se encontraron resultados.</li>';
         return;
     }
 
@@ -221,7 +218,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Renderizamos los 3 productos en el contenedor único de catálogo
+    // Renderizamos los 3 productos
     renderGrid(productos, 'grid-productos');
     
     const elementsToAnimate = document.querySelectorAll('.fade-in');
