@@ -86,12 +86,36 @@ const formatPrice = (price) => {
 // --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 50) {
+    if (window.scrollY > 10) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
     }
 });
+
+// --- LÓGICA DEL SLIDER (Deslizamiento Horizontal Automático) ---
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const sliderTrack = document.getElementById('slider-track');
+const totalSlides = slides.length;
+
+function showSlide(index) {
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    // Desliza el carril a la izquierda
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+
+// Auto avance cada 10 segundos
+setInterval(nextSlide, 10000);
 
 // --- RENDERIZAR PRODUCTOS EN GRILLAS ---
 const renderGrid = (listaProductos, containerId) => {

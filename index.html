@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -60,22 +60,38 @@
         </div>
     </header>
 
-    <section id="inicio" class="hero-section">
-        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=2000&auto=format&fit=crop');">
-            <div class="hero-overlay"></div>
+    <section id="inicio" class="hero-slider">
+        <div class="slider-container">
+            <div class="slider-track" id="slider-track">
+                
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=2000&auto=format&fit=crop');">
+                    <div class="slide-overlay"></div>
+                    <div class="container hero-content fade-in">
+                        <h1>Última Colección</h1>
+                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                    </div>
+                </div>
+                
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2000&auto=format&fit=crop');">
+                    <div class="slide-overlay"></div>
+                    <div class="container hero-content fade-in">
+                        <h1>Diseños Exclusivos</h1>
+                        <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Ver Productos</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="container hero-content fade-in">
-            <h1>Muebles de madera que transforman tu espacio</h1>
-            <p>Diseño exclusivo, acabados perfectos y materiales nobles para tu hogar.</p>
-            <button class="btn btn-primary" onclick="document.getElementById('lanzamientos').scrollIntoView({behavior: 'smooth'})">Explorar Colección</button>
-        </div>
+        
+        <button class="slider-btn prev" aria-label="Anterior" onclick="prevSlide()">&#10094;</button>
+        <button class="slider-btn next" aria-label="Siguiente" onclick="nextSlide()">&#10095;</button>
     </section>
 
     <div class="promo-banner fade-in">
-        <p class="promo-text">Envío sin cargo en toda la línea de mesas y escritorios.</p>
+        <p class="promo-text">Envío <span class="badge" style="background-color: #e63946; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; margin: 0 4px;">Gratis</span> llevando 2 o más productos</p>
     </div>
 
-    <main id="lanzamientos" class="section">
+    <main id="lanzamientos" class="section first-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Últimos Lanzamientos</h2>
@@ -89,22 +105,22 @@
         <div class="exclusive-bg" style="background-image: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=2000&auto=format&fit=crop');"></div>
         <div class="exclusive-overlay"></div>
         <div class="container exclusive-content">
-            <h2>Artesanía y Vanguardia</h2>
-            <p>Descubrí piezas únicas creadas a medida para quienes valoran los detalles.</p>
-            <button class="btn btn-outline-light">Conocer el Taller</button>
+            <h2>Obtené Acceso Exclusivo</h2>
+            <p>Recibí antes que nadie acceso a nuestros lanzamientos, descuentos únicos y mucho más.</p>
+            <button class="btn btn-primary">Quiero Acceso Exclusivo</button>
         </div>
     </section>
 
     <section id="mas-vendidos" class="section bg-cream">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Selección Destacada</h2>
+                <h2 class="section-title">Los Más Vendidos</h2>
             </div>
             <div id="grid-vendidos" class="grid fade-in"></div>
         </div>
     </section>
 
-    <section id="contacto" class="section bg-cream">
+    <section id="contacto" class="section bg-cream" style="padding-top: 0;">
         <div class="container fade-in">
             <div class="contact-card">
                 <h2>¿Buscás un proyecto a medida?</h2>
@@ -148,17 +164,17 @@
             </div>
             <div class="footer-links">
                 <div class="footer-col">
-                    <h4>Navegación</h4>
+                    <h4>Sitio</h4>
                     <ul>
-                        <li><a href="#lanzamientos">Colección</a></li>
-                        <li><a href="#mas-vendidos">Destacados</a></li>
+                        <li><a href="#lanzamientos">Productos</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Social</h4>
+                    <h4>Redes</h4>
                     <ul>
                         <li><a href="#">Instagram</a></li>
+                        <li><a href="#">TikTok</a></li>
                         <li><a href="#">Pinterest</a></li>
                     </ul>
                 </div>
