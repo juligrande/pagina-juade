@@ -1,13 +1,12 @@
-// --- DATOS DE PRODUCTOS ---
-// Las imágenes de placeholder ahora usan BLANCO de fondo y MARRÓN de texto
-// para coincidir con la estética de las tarjetas blancas.
+// --- DATOS DE PRODUCTOS (Paleta integrada en placeholders) ---
+// Utilizo el color CREMA de fondo para las imágenes y MARRÓN para el texto
 const productos = [
     {
         id: 1,
         name: "Separadores de Libros",
         price: 8750,
         description: "Set de separadores minimalistas cortados con precisión láser. Ideales para amantes de la lectura que valoran el diseño sutil. Un detalle premium para tu biblioteca.",
-        image: "https://placehold.co/800x800/ffffff/856A48?text=Separadores", 
+        image: "https://placehold.co/800x800/FCF5E1/856A48?text=Separadores", 
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1" 
     },
     {
@@ -15,7 +14,7 @@ const productos = [
         name: "Porta Llaves",
         price: 22500,
         description: "Organizador de entrada elegante y funcional. Mantené tus llaves en su lugar con una pieza de diseño geométrico que eleva la estética de cualquier recibidor.",
-        image: "https://placehold.co/800x800/ffffff/856A48?text=Porta+Llaves",
+        image: "https://placehold.co/800x800/FCF5E1/856A48?text=Porta+Llaves",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
@@ -23,7 +22,7 @@ const productos = [
         name: "Organizador de Cables",
         price: 12500,
         description: "La solución definitiva para un escritorio minimalista. Este bloque de MDF sujeta tus cables de carga evitando enredos, manteniendo tu espacio de trabajo impecable.",
-        image: "https://placehold.co/800x800/ffffff/856A48?text=Organizador", 
+        image: "https://placehold.co/800x800/FCF5E1/856A48?text=Organizador", 
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
     }
 ];
@@ -57,7 +56,7 @@ const renderProductos = () => {
     productos.forEach((p, index) => {
         const card = document.createElement('article');
         card.className = 'card fade-in-up';
-        // Añadir un pequeño retraso a cada tarjeta para efecto cascada al scrollear
+        // Añadir un pequeño retraso a cada tarjeta para efecto cascada
         card.style.transitionDelay = `${index * 0.15}s`;
         
         card.onclick = () => openModal(p.id);
@@ -94,7 +93,7 @@ window.openModal = (id) => {
     // Mostrar modal
     modal.showModal();
     
-    // Bloquear scroll de la página de fondo para mayor inmersión
+    // Bloquear scroll de la página de fondo
     document.body.style.overflow = 'hidden'; 
 };
 
@@ -106,7 +105,7 @@ const closeModal = () => {
 
 closeModalBtn.addEventListener('click', closeModal);
 
-// Cerrar haciendo click en el fondo translúcido
+// Cerrar haciendo click fuera de la caja blanca
 modal.addEventListener('click', (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
@@ -119,23 +118,22 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// --- ANIMACIONES ON SCROLL (Observer) ---
+// --- ANIMACIONES ON SCROLL (Apple-like Fade In Up) ---
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-            // Deja de observar para que la animación ocurra solo 1 vez
             scrollObserver.unobserve(entry.target); 
         }
     });
 }, {
-    threshold: 0.15, 
+    threshold: 0.15, // Se activa cuando el 15% del elemento es visible
     rootMargin: "0px 0px -50px 0px"
 });
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Actualizar año del footer automáticamente
+    // Actualizar año del footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
     // Generar las tarjetas
