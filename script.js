@@ -2,40 +2,93 @@
 const productos = [
     {
         id: 1,
-        name: "Mesa de Comedor Maciza",
-        price: 180000,
-        variants: "Roble, Petiribí, Nogal",
-        description: "Mesa robusta de madera maciza, ideal para hogares modernos. Terminaciones de alta calidad tratadas con aceites naturales para resaltar la veta original de la madera. Capacidad para 6 a 8 personas. Fabricación artesanal.",
-        // Usando placeholders con la paleta de colores para que se vea bien
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Mesa+Maciza", 
+        name: "Portallaves Familia 4",
+        price: 15000,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_familia_4.png", 
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
     },
     {
         id: 2,
-        name: "Estante Flotante Minimal",
-        price: 25000,
-        variants: "Natural, Blanco, Negro",
-        description: "Líneas limpias y fijación invisible. Ideal para aportar calidez a cualquier ambiente sin sobrecargar el espacio visual. Soporta hasta 15kg.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Estante",
+        name: "Portallaves Familia Auto",
+        price: 16000,
+        variants: "1, 2, 3",
+        description: "asd",
+        image: "./images/Portallaves_familia_auto.png",
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
     },
     {
         id: 3,
-        name: "Escritorio Office Elegance",
-        price: 95000,
-        variants: "Paraíso, Guatambú",
-        description: "Diseñado para la productividad. Superficie amplia con tratamiento antimanchas y pasacables oculto integrado. El equilibrio perfecto entre función y estética.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Escritorio", 
+        name: "Portallaves Gatitos",
+        price: 14500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_gatitos.png", 
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
     },
     {
         id: 4,
-        name: "Banco Rústico Heritage",
-        price: 40000,
-        variants: "Rústico, Barnizado",
-        description: "Pieza de acento fabricada con maderas recuperadas. Cada banco cuenta una historia única a través de sus vetas y texturas irregulares.",
-        image: "https://placehold.co/600x800/FCF5E1/856A48?text=Banco", 
+        name: "Portallaves Nube",
+        price: 14000,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_nube.png", 
         link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
+    },
+    {
+        id: 5,
+        name: "Portallaves Pareja Auto",
+        price: 16500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_pareja_auto.png", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
+    },
+    {
+        id: 6,
+        name: "Portallaves Pareja Gatos",
+        price: 15500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_pareja_gatos.png", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
+    },
+    {
+        id: 7,
+        name: "Portallaves Pareja",
+        price: 14000,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_pareja.png", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
+    },
+    {
+        id: 8,
+        name: "Portallaves Pez",
+        price: 13500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_pez.png", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
+    },
+    {
+        id: 9,
+        name: "Portallaves Salchicha Sentado",
+        price: 14500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_salchicha_sentado.jfif", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX9"
+    },
+    {
+        id: 10,
+        name: "Portallaves Salchicha",
+        price: 14500,
+        variants: "1, 2",
+        description: "asd",
+        image: "./images/Portallaves_salchicha.png", 
+        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX10"
     }
 ];
 
@@ -103,7 +156,7 @@ const renderGrid = (listaProductos, containerId) => {
             </div>
             <div class="card-body">
                 <h3 class="card-title">${producto.name}</h3>
-                <p class="card-price">${formatPrice(producto.price)} USD</p>
+                <p class="card-price">${formatPrice(producto.price)}</p>
             </div>
         `;
         
