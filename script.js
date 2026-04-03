@@ -1,24 +1,22 @@
-
+// --- DATOS DE PRODUCTOS DESDE GOOGLE SHEETS ---
 let productos = []; 
 
+// 👇👇👇 PEGA TU LINK .CSV ACÁ ADENTRO DE LAS COMILLAS 👇👇👇
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgT3tL1JyA-4SZAwmqkCh1wTbLJO-Wxxk5ZFT6w1ToNnTwnp7REyfb02Z96JL0SgHT6ZZyIZQ3eGXm/pub?output=csv";
 
 const cargarProductos = () => {
     Papa.parse(SHEET_URL, {
         download: true,
-        header: true, // Le dice que la primera fila son los títulos
-        dynamicTyping: true, // Convierte los precios a números automáticamente
-        skipEmptyLines: true, // Ignora filas vacías
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true,
         complete: function(results) {
-            // Guardamos los datos
             productos = results.data.filter(p => p.id); 
-            
-            // Una vez que cargan, dibujamos la grilla
             renderGrid(productos, 'products-grid');
         },
         error: function(err) {
             console.error("Error al cargar el Excel:", err);
-            document.getElementById('products-grid').innerHTML = '<p style="text-align:center; width:100%;">Hubo un error cargando el catálogo. Intentá recargar la página.</p>';
+            document.getElementById('products-grid').innerHTML = '<p style="text-align:center; width:100%;">Hubo un error cargando el catálogo.</p>';
         }
     });
 };
@@ -33,7 +31,27 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- EFECTO NAVBAR SCROLL (Glassmorphism) ---
+// --- MENU MOVIL ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navLinks = document.getElementById('nav-links');
+
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    // Previene el scroll del fondo cuando el menú está abierto
+    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+});
+
+// Cerrar el menú móvil al clickear un link normal
+document.querySelectorAll('.close-on-click').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+});
+
+// --- EFECTO NAVBAR SCROLL ---
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (window.scrollY > 10) {
@@ -43,7 +61,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// --- LÓGICA DEL SLIDER (Deslizamiento Horizontal Automático) ---
+// --- LÓGICA DEL SLIDER (Con soporte Touch/Swipe) ---
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const sliderTrack = document.getElementById('slider-track');
@@ -65,11 +83,29 @@ function prevSlide() { showSlide(currentSlide - 1); }
 
 setInterval(nextSlide, 8000); 
 
-// --- RENDERIZAR PRODUCTOS EN GRILLA ÚNICA ---
+// GESTOS TOUCH (SWIPE) PARA MÓVIL
+let touchStartX = 0;
+let touchEndX = 0;
+
+sliderTrack.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+sliderTrack.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    // Si arrastra más de 50px hacia la izquierda o derecha, cambia de foto
+    if (touchStartX - touchEndX > 50) nextSlide();
+    if (touchEndX - touchStartX > 50) prevSlide();
+}
+
+// --- RENDERIZAR PRODUCTOS EN GRILLA ---
 const renderGrid = (listaProductos, containerId) => {
     const grid = document.getElementById(containerId);
     if(!grid) return;
-    
     grid.innerHTML = '';
     
     listaProductos.forEach(producto => {
@@ -89,7 +125,6 @@ const renderGrid = (listaProductos, containerId) => {
                 <p class="card-price">${formatPrice(producto.price)}</p>
             </div>
         `;
-        
         grid.appendChild(card);
     });
 };
@@ -117,7 +152,6 @@ function renderSearchResults(query) {
     searchResultsContainer.innerHTML = '';
     const term = query.toLowerCase().trim();
     
-    // Validar que las variantes existan antes de buscar
     const filtered = productos.filter(p => 
         (p.name && p.name.toLowerCase().includes(term)) || 
         (p.variants && p.variants.toString().toLowerCase().includes(term))
@@ -134,6 +168,12 @@ function renderSearchResults(query) {
         
         li.onclick = () => {
             searchDropdown.classList.remove('active');
+            
+            // Si estábamos en celular, cierra el menú de pantalla completa
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
             openModal(producto.id);
         };
 
@@ -149,7 +189,7 @@ function renderSearchResults(query) {
 }
 
 document.addEventListener('click', (e) => {
-    if (!searchTrigger.contains(e.target) && !searchDropdown.contains(e.target)) {
+    if (!searchTrigger.contains(e.target) && !searchDropdown.contains(e.target) && e.target.id !== 'search-input') {
         searchDropdown.classList.remove('active');
     }
 });
@@ -179,6 +219,7 @@ window.openModal = (id) => {
 };
 
 const closeModal = () => {
+    // Al cerrar, sacamos la animación primero
     modal.close();
     document.body.style.overflow = 'auto'; 
 };
@@ -213,10 +254,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Llamamos a la función que trae los productos desde Google Sheets
     cargarProductos();
-    
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 });

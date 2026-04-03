@@ -20,26 +20,29 @@
                 SYNCRO<span>CNC</span>
             </a>
             <nav>
-                <ul class="nav-links">
+                <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Abrir menú">
+                    <span></span><span></span><span></span>
+                </button>
+                
+                <ul class="nav-links" id="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     
                     <li class="dropdown-item">
-                        <a href="#productos">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
+                        <a href="#productos" class="prevent-mobile">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Colección</h4>
                                 <ul>
-                                    <li><a href="#productos">1</a></li>
-                                    <li><a href="#productos">2</a></li>
-                                    <li><a href="#productos">3</a></li>
-                                    <li><a href="#productos">4</a></li>
+                                    <li><a href="#productos" class="close-on-click">1</a></li>
+                                    <li><a href="#productos" class="close-on-click">2</a></li>
+                                    <li><a href="#productos" class="close-on-click">3</a></li>
                                 </ul>
                             </div>
                             <div class="dropdown-column">
                                 <h4>Filtros</h4>
                                 <ul>
-                                    <li><a href="#productos">5</a></li>
-                                    <li><a href="#productos">6</a></li>
+                                    <li><a href="#productos" class="close-on-click">4</a></li>
+                                    <li><a href="#productos" class="close-on-click">5</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -50,13 +53,13 @@
                         <div class="search-dropdown" id="search-dropdown">
                             <div class="search-input-wrapper">
                                 <span class="search-icon">⌕</span>
-                                <input type="text" id="search-input" placeholder="Buscar por producto o madera...">
+                                <input type="text" id="search-input" placeholder="Buscar producto..." style="font-size: 16px;">
                             </div>
                             <ul class="search-results" id="search-results"></ul>
                         </div>
                     </li>
 
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#contacto" class="close-on-click">Contacto</a></li>
                 </ul>
             </nav>
         </div>
@@ -98,7 +101,7 @@
     </section>
 
     <div class="promo-banner fade-in">
-        <p class="promo-text">asd</p>
+        <p class="promo-text">Diseño exclusivo en cada detalle.</p>
     </div>
 
     <main id="productos" class="section first-section">
@@ -119,7 +122,7 @@
                     <img id="modal-img" src="" alt="Producto">
                 </div>
                 <div class="modal-info">
-                    <span class="modal-category">asdasdasd</span>
+                    <span class="modal-category">CATÁLOGO SYNCRO</span>
                     <h3 id="modal-title"></h3>
                     <p id="modal-price" class="modal-price"></p>
                     <div class="modal-divider"></div>
@@ -137,7 +140,7 @@
         </div>
     </dialog>
 
-    <footer class="footer">
+    <footer class="footer" id="contacto">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo-premium footer-logo">
