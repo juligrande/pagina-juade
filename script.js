@@ -1,99 +1,31 @@
-// --- DATOS DE PRODUCTOS ---
-const productos = [
-    {
-        id: 1,
-        name: "Portallaves Familia 4",
-        price: 15000,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_familia_4.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX1"
-    },
-    {
-        id: 2,
-        name: "Portallaves Familia Auto",
-        price: 16000,
-        variants: "1, 2, 3",
-        description: "asd",
-        image: "./images/Portallaves_familia_auto.png",
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX2"
-    },
-    {
-        id: 3,
-        name: "Portallaves Gatitos",
-        price: 14500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_gatitos.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX3"
-    },
-    {
-        id: 4,
-        name: "Portallaves Nube",
-        price: 14000,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_nube.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX4"
-    },
-    {
-        id: 5,
-        name: "Portallaves Pareja Auto",
-        price: 16500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_pareja_auto.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX5"
-    },
-    {
-        id: 6,
-        name: "Portallaves Pareja Gatos",
-        price: 15500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_pareja_gatos.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX6"
-    },
-    {
-        id: 7,
-        name: "Portallaves Pareja",
-        price: 14000,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_pareja.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX7"
-    },
-    {
-        id: 8,
-        name: "Portallaves Pez",
-        price: 13500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_pez.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX8"
-    },
-    {
-        id: 9,
-        name: "Portallaves Salchicha Sentado",
-        price: 14500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_salchicha_sentado.jfif", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX9"
-    },
-    {
-        id: 10,
-        name: "Portallaves Salchicha",
-        price: 14500,
-        variants: "1, 2",
-        description: "asd",
-        image: "./images/Portallaves_salchicha.png", 
-        link: "https://articulo.mercadolibre.com.ar/MLA-XXXX10"
-    }
-];
+
+let productos = []; 
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgT3tL1JyA-4SZAwmqkCh1wTbLJO-Wxxk5ZFT6w1ToNnTwnp7REyfb02Z96JL0SgHT6ZZyIZQ3eGXm/pub?output=csv";
+
+const cargarProductos = () => {
+    Papa.parse(SHEET_URL, {
+        download: true,
+        header: true, // Le dice que la primera fila son los títulos
+        dynamicTyping: true, // Convierte los precios a números automáticamente
+        skipEmptyLines: true, // Ignora filas vacías
+        complete: function(results) {
+            // Guardamos los datos
+            productos = results.data.filter(p => p.id); 
+            
+            // Una vez que cargan, dibujamos la grilla
+            renderGrid(productos, 'products-grid');
+        },
+        error: function(err) {
+            console.error("Error al cargar el Excel:", err);
+            document.getElementById('products-grid').innerHTML = '<p style="text-align:center; width:100%;">Hubo un error cargando el catálogo. Intentá recargar la página.</p>';
+        }
+    });
+};
 
 // --- UTILIDADES ---
 const formatPrice = (price) => {
+    if(!price) return "";
     return new Intl.NumberFormat('es-AR', {
         style: 'currency',
         currency: 'ARS',
@@ -125,15 +57,13 @@ function showSlide(index) {
     } else {
         currentSlide = index;
     }
-    // Desliza el carril a la izquierda
     sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
 function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
-// Auto avance cada 10 segundos
-setInterval(nextSlide, 10000);
+setInterval(nextSlide, 8000); 
 
 // --- RENDERIZAR PRODUCTOS EN GRILLA ÚNICA ---
 const renderGrid = (listaProductos, containerId) => {
@@ -187,9 +117,10 @@ function renderSearchResults(query) {
     searchResultsContainer.innerHTML = '';
     const term = query.toLowerCase().trim();
     
+    // Validar que las variantes existan antes de buscar
     const filtered = productos.filter(p => 
-        p.name.toLowerCase().includes(term) || 
-        p.variants.toLowerCase().includes(term)
+        (p.name && p.name.toLowerCase().includes(term)) || 
+        (p.variants && p.variants.toString().toLowerCase().includes(term))
     );
 
     if (filtered.length === 0) {
@@ -210,7 +141,7 @@ function renderSearchResults(query) {
             <img src="${producto.image}" alt="${producto.name}" class="search-result-img">
             <div class="search-result-info">
                 <span class="search-result-title">${producto.name}</span>
-                <span class="search-result-variants">${producto.variants}</span>
+                <span class="search-result-variants">${producto.variants || ''}</span>
             </div>
         `;
         searchResultsContainer.appendChild(li);
@@ -244,17 +175,16 @@ window.openModal = (id) => {
     modalLink.href = producto.link;
 
     modal.showModal();
-    document.body.style.overflow = 'hidden'; // Prevenir scroll de fondo
+    document.body.style.overflow = 'hidden'; 
 };
 
 const closeModal = () => {
     modal.close();
-    document.body.style.overflow = 'auto'; // Restaurar scroll
+    document.body.style.overflow = 'auto'; 
 };
 
 closeModalBtn.addEventListener('click', closeModal);
 
-// Cerrar al clickear en el backdrop
 modal.addEventListener('click', (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
@@ -267,27 +197,26 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// --- ANIMACIONES ON SCROLL (Intersection Observer) ---
+// --- ANIMACIONES ON SCROLL ---
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-            scrollObserver.unobserve(entry.target); // Dejar de observar después de la animación
+            scrollObserver.unobserve(entry.target);
         }
     });
 }, {
-    threshold: 0.1, // Activar cuando el 10% sea visible
-    rootMargin: "0px 0px -50px 0px" // Un pequeño margen
+    threshold: 0.1, 
+    rootMargin: "0px 0px -50px 0px"
 });
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Renderizamos los productos en el contenedor unificado
-    renderGrid(productos, 'products-grid');
+    // Llamamos a la función que trae los productos desde Google Sheets
+    cargarProductos();
     
-    // Observar elementos para animar
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 });
