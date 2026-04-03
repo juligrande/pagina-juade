@@ -31,24 +31,26 @@ const formatPrice = (price) => {
     }).format(price);
 };
 
-// --- MENU MOVIL ---
+// --- MENU MOVIL REPARADO ---
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navLinks = document.getElementById('nav-links');
 
 mobileMenuBtn.addEventListener('click', () => {
     mobileMenuBtn.classList.toggle('active');
     navLinks.classList.toggle('active');
-    // Previene el scroll del fondo cuando el menú está abierto
     document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
 });
 
-// Cerrar el menú móvil al clickear un link normal
-document.querySelectorAll('.close-on-click').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
+// ¡NUEVO! Cerrar el menú móvil al clickear CUALQUIER link (Inicio, Catálogo, Contacto)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    // Si tocan el buscador, que no se cierre el menú, si tocan lo demás, sí.
+    if(link.id !== 'search-trigger') {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
 });
 
 // --- EFECTO NAVBAR SCROLL ---
@@ -219,7 +221,6 @@ window.openModal = (id) => {
 };
 
 const closeModal = () => {
-    // Al cerrar, sacamos la animación primero
     modal.close();
     document.body.style.overflow = 'auto'; 
 };
