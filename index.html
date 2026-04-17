@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNCRO CNC | Diseño Premium en Madera MDF</title>
+    <title>SYNCRO CNC</title>
     <meta name="description" content="Muebles de madera que transforman tu espacio. Calidad premium y diseño exclusivo.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,22 +27,22 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     
-                    <li class="dropdown-item">
+                    <li class="dropdown-item" id="mobile-dropdown-trigger">
                         <a href="#productos" class="prevent-mobile">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Colección</h4>
                                 <ul>
-                                    <li><a href="#productos" class="close-on-click">1</a></li>
-                                    <li><a href="#productos" class="close-on-click">2</a></li>
-                                    <li><a href="#productos" class="close-on-click">3</a></li>
+                                    <li><a href="#productos">1</a></li>
+                                    <li><a href="#productos">2</a></li>
+                                    <li><a href="#productos">3</a></li>
                                 </ul>
                             </div>
                             <div class="dropdown-column">
                                 <h4>Filtros</h4>
                                 <ul>
-                                    <li><a href="#productos" class="close-on-click">4</a></li>
-                                    <li><a href="#productos" class="close-on-click">5</a></li>
+                                    <li><a href="#productos">4</a></li>
+                                    <li><a href="#productos">5</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                         </div>
                     </li>
 
-                    <li><a href="#contacto" class="close-on-click">Contacto</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
         </div>
@@ -68,31 +68,9 @@
     <section id="inicio" class="hero-slider">
         <div class="slider-container">
             <div class="slider-track" id="slider-track">
-                
-                <div class="slide" style="background-image: url('./images/Portallaves_familia_4.webp');">
-                    <div class="slide-overlay"></div>
-                    <div class="container hero-content fade-in">
-                        <h1>Portallaves Familia</h1>
-                        <button class="btn btn-primary" onclick="openModal(1)">Ver Producto</button>
-                    </div>
-                </div>
-                
-                <div class="slide" style="background-image: url('./images/Portallaves_pareja.webp');">
-                    <div class="slide-overlay"></div>
-                    <div class="container hero-content fade-in">
-                        <h1>Diseño Parejas</h1>
-                        <button class="btn btn-primary" onclick="openModal(7)">Ver Producto</button>
-                    </div>
-                </div>
-
-                <div class="slide" style="background-image: url('./images/Portallaves_salchicha.webp');">
-                    <div class="slide-overlay"></div>
-                    <div class="container hero-content fade-in">
-                        <h1>Perro Salchicha</h1>
-                        <button class="btn btn-primary" onclick="openModal(10)">Ver Producto</button>
-                    </div>
-                </div>
-
+                <div class="slide skeleton"></div>
+                <div class="slide skeleton hide-mobile"></div>
+                <div class="slide skeleton hide-mobile hide-tablet"></div>
             </div>
         </div>
         
@@ -100,17 +78,17 @@
         <button class="slider-btn next" aria-label="Siguiente" onclick="nextSlide()">&#10095;</button>
     </section>
 
-    <div class="promo-banner fade-in">
-        <p class="promo-text">Diseño exclusivo en cada detalle.</p>
-    </div>
-
     <main id="productos" class="section first-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Nuestro Catálogo</h2>
-                <a href="#" class="view-all">Ver todo →</a>
             </div>
-            <div id="products-grid" class="grid fade-in"></div>
+            <div id="products-grid" class="grid fade-in">
+                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
+            </div>
         </div>
     </main>
 
@@ -129,8 +107,8 @@
                     <p id="modal-desc" class="modal-description"></p>
                     
                     <div class="modal-actions">
-                        <a id="modal-link" href="#" target="_blank" class="btn-ml btn-ml-flex">
-                            <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.21.12/mercadolibre/logo__large_plus.png" alt="MercadoLibre">
+                        <a id="modal-link" href="#" target="_blank" class="btn-ml">
+                            <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.21.12/mercadolibre/logo__large_plus.png" alt="MercadoLibre" style="height: 20px;">
                             Ver en MercadoLibre
                         </a>
                         <p class="ml-guarantee">✓ Compra protegida y envío asegurado.</p>
@@ -155,6 +133,7 @@
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
+                <br>
                 <div class="footer-col">
                     <h4>Redes</h4>
                     <ul>
