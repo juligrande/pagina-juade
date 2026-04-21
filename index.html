@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNCRO CNC</title>
-    <meta name="description" content="Muebles de madera que transforman tu espacio. Calidad premium y diseño exclusivo.">
+    <title>SYNCRO CNC — Muebles de Madera</title>
+    <meta name="description" content="Muebles de madera artesanales. Calidad premium y diseño exclusivo.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cascadia+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,7 +28,7 @@
                     <li><a href="#inicio">Inicio</a></li>
                     
                     <li class="dropdown-item" id="mobile-dropdown-trigger">
-                        <a href="#productos" class="prevent-mobile">Catálogo <span style="font-size: 0.6rem; margin-left: 4px;">▼</span></a>
+                        <a href="#productos" class="prevent-mobile">Catálogo <span class="chevron">▼</span></a>
                         <div class="dropdown-menu">
                             <div class="dropdown-column">
                                 <h4>Colección</h4>
@@ -76,18 +76,21 @@
         
         <button class="slider-btn prev" aria-label="Anterior" onclick="prevSlide()">&#10094;</button>
         <button class="slider-btn next" aria-label="Siguiente" onclick="nextSlide()">&#10095;</button>
+
+        <div class="slider-dots" id="slider-dots"></div>
     </section>
 
     <main id="productos" class="section first-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Nuestro Catálogo</h2>
+                <p class="section-subtitle">Cada pieza, hecha con cuidado.</p>
             </div>
             <div id="products-grid" class="grid fade-in">
-                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 350px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
             </div>
         </div>
     </main>
@@ -111,7 +114,7 @@
                             <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.21.12/mercadolibre/logo__large_plus.png" alt="MercadoLibre" style="height: 20px;">
                             Ver en MercadoLibre
                         </a>
-                        <p class="ml-guarantee">✓ Compra protegida y envío asegurado.</p>
+                        <p class="ml-guarantee">✓ Compra protegida · Envío a todo el país</p>
                     </div>
                 </div>
             </div>
@@ -124,6 +127,7 @@
                 <a href="#" class="logo-premium footer-logo">
                     SYNCRO<span>CNC</span>
                 </a>
+                <p class="footer-tagline">Muebles de madera hechos con precisión y cariño.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-col">
@@ -133,7 +137,6 @@
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
-                <br>
                 <div class="footer-col">
                     <h4>Redes</h4>
                     <ul>
@@ -143,7 +146,7 @@
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; <span id="current-year"></span> SYNCRO CNC.</p>
+            <p>&copy; <span id="current-year"></span> SYNCRO CNC. Todos los derechos reservados.</p>
         </div>
     </footer>
 
