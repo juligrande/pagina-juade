@@ -3,6 +3,9 @@
 // ============================================================
 let productos = [];
 
+// Categoría de fallback para productos sin categoría o con categoría desconocida
+const FALLBACK_CATEGORY = 'Otros';
+
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgT3tL1JyA-4SZAwmqkCh1wTbLJO-Wxxk5ZFT6w1ToNnTwnp7REyfb02Z96JL0SgHT6ZZyIZQ3eGXm/pub?output=csv";
 
 const cargarProductos = () => {
@@ -13,12 +16,20 @@ const cargarProductos = () => {
         skipEmptyLines: true,
         complete(results) {
             productos = results.data.filter(p => p.id);
-            renderGrid(productos, 'products-grid');
+
+            // Normalizar: si no tiene category, asignar FALLBACK
+            productos = productos.map(p => ({
+                ...p,
+                category: (p.category && p.category.toString().trim()) || FALLBACK_CATEGORY
+            }));
+
+            renderCatalogSections(productos);
+            buildNavDropdown(productos);
             renderSlider(productos);
         },
         error(err) {
             console.error("Error al cargar el catálogo:", err);
-            document.getElementById('products-grid').innerHTML =
+            document.getElementById('catalog-sections').innerHTML =
                 '<p style="text-align:center;width:100%;color:var(--color-marron);padding:2rem 0;">Hubo un error cargando el catálogo.</p>';
         }
     });
@@ -41,6 +52,91 @@ function closeMobileMenu() {
     navLinks.classList.remove('active');
     document.body.style.overflow = '';
 }
+
+// Genera un id válido para usar como ancla desde el nombre de categoría
+function categoryToId(name) {
+    return 'cat-' + name
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+}
+
+// ============================================================
+// CATEGORÍAS — RENDER SECCIONES DINÁMICAS
+// ============================================================
+function getCategoriesOrdered(lista) {
+    // Orden de aparición en el sheet, pero "Otros" siempre al final
+    const seen = [];
+    lista.forEach(p => {
+        if (!seen.includes(p.category)) seen.push(p.category);
+    });
+    const sinOtros = seen.filter(c => c !== FALLBACK_CATEGORY);
+    const tieneOtros = seen.includes(FALLBACK_CATEGORY);
+    return tieneOtros ? [...sinOtros, FALLBACK_CATEGORY] : sinOtros;
+}
+
+const renderCatalogSections = (lista) => {
+    const container = document.getElementById('catalog-sections');
+    container.innerHTML = '';
+
+    const categories = getCategoriesOrdered(lista);
+
+    categories.forEach((cat, idx) => {
+        const catId    = categoryToId(cat);
+        const catItems = lista.filter(p => p.category === cat);
+
+        const section = document.createElement('section');
+        section.id        = catId;
+        section.className = `section${idx === 0 ? ' first-section' : ' category-section'}`;
+
+        section.innerHTML = `
+            <div class="container">
+                <div class="section-header fade-in">
+                    <div class="category-label-pill">${cat === FALLBACK_CATEGORY ? '✦ ' : ''}${cat}</div>
+                    <h2 class="section-title">${cat}</h2>
+                    <p class="section-subtitle">${catItems.length} producto${catItems.length !== 1 ? 's' : ''}</p>
+                </div>
+                <div id="grid-${catId}" class="grid"></div>
+            </div>
+        `;
+
+        container.appendChild(section);
+        section.querySelectorAll('.fade-in').forEach(el => scrollObserver.observe(el));
+
+        renderGrid(catItems, `grid-${catId}`);
+    });
+};
+
+// ============================================================
+// NAV DROPDOWN DINÁMICO
+// ============================================================
+const buildNavDropdown = (lista) => {
+    const dropdownMenu = document.getElementById('nav-dropdown-menu');
+    if (!dropdownMenu) return;
+
+    const categories = getCategoriesOrdered(lista);
+
+    // Una sola columna con todas las categorías
+    const col = document.createElement('div');
+    col.className = 'dropdown-column';
+    col.innerHTML = `<h4>Categorías</h4>`;
+
+    const ul = document.createElement('ul');
+    categories.forEach(cat => {
+        const catId = categoryToId(cat);
+        const li    = document.createElement('li');
+        const a     = document.createElement('a');
+        a.href        = `#${catId}`;
+        a.textContent = cat;
+        a.addEventListener('click', () => closeMobileMenu());
+        li.appendChild(a);
+        ul.appendChild(li);
+    });
+
+    col.appendChild(ul);
+    dropdownMenu.appendChild(col);
+};
 
 // ============================================================
 // NAVBAR
@@ -65,7 +161,6 @@ if (mobileDropdownTrigger) {
     mobileDropdownTrigger.addEventListener('click', (e) => {
         if (!isMobile()) return;
 
-        // Click en el link principal o el chevron → toggle accordion
         if (dropdownAnchor && (e.target === dropdownAnchor || dropdownAnchor.contains(e.target))) {
             e.preventDefault();
             e.stopPropagation();
@@ -73,7 +168,6 @@ if (mobileDropdownTrigger) {
             return;
         }
 
-        // Click en link hijo → navegar y cerrar menú
         if (e.target.tagName === 'A') {
             closeMobileMenu();
         }
@@ -119,7 +213,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const id = this.getAttribute('href');
         if (id === '#' || id === '') return;
 
-        // En mobile, el link principal del catálogo no navega, solo abre el accordion
         if (this.classList.contains('prevent-mobile') && isMobile()) {
             e.preventDefault();
             return;
@@ -135,6 +228,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const pos  = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navH - 8);
         smoothScroll(pos, 1100);
     });
+});
+
+// Delegación para links del dropdown dinámico (generados después del DOMContentLoaded)
+document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href^="#cat-"]');
+    if (!anchor) return;
+    e.preventDefault();
+    closeMobileMenu();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (!target) return;
+    const navH = document.getElementById('navbar').offsetHeight;
+    const pos  = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navH - 8);
+    smoothScroll(pos, 1100);
 });
 
 // Navbar scroll state
@@ -189,7 +295,6 @@ function buildDots() {
     const ipv     = getItemsPerView();
     const numDots = Math.max(1, totalSlides - ipv + 1);
 
-    // No mostrar dots si solo hay 1 posición
     if (numDots <= 1) return;
 
     for (let i = 0; i < numDots; i++) {
@@ -243,7 +348,7 @@ window.addEventListener('resize', () => {
     if (totalSlides > 0) { buildDots(); showSlide(currentSlide); }
 }, { passive: true });
 
-// Touch swipe con flag anti-click
+// Touch swipe
 let touchStartX = 0;
 let touchStartY = 0;
 let isSwiping   = false;
@@ -327,7 +432,8 @@ function renderSearchResults(query) {
 
     const filtered = productos.filter(p =>
         (p.name     && p.name.toLowerCase().includes(term)) ||
-        (p.variants && p.variants.toString().toLowerCase().includes(term))
+        (p.variants && p.variants.toString().toLowerCase().includes(term)) ||
+        (p.category && p.category.toLowerCase().includes(term))
     );
 
     if (filtered.length === 0) {
@@ -348,7 +454,7 @@ function renderSearchResults(query) {
             <img src="${producto.image}" alt="${producto.name}" class="search-result-img">
             <div class="search-result-info">
                 <span class="search-result-title">${producto.name}</span>
-                <span class="search-result-variants">${producto.variants || ''}</span>
+                <span class="search-result-variants">${producto.category || ''}${producto.variants ? ' · ' + producto.variants : ''}</span>
             </div>
         `;
         searchResultsContainer.appendChild(li);
@@ -371,14 +477,14 @@ window.openModal = (id) => {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
 
-    document.getElementById('modal-img').src           = producto.image;
-    document.getElementById('modal-img').alt           = producto.name;
-    document.getElementById('modal-title').textContent = producto.name;
-    document.getElementById('modal-desc').textContent  = producto.description;
-    document.getElementById('modal-price').textContent = formatPrice(producto.price);
-    document.getElementById('modal-link').href         = producto.link;
+    document.getElementById('modal-img').src              = producto.image;
+    document.getElementById('modal-img').alt              = producto.name;
+    document.getElementById('modal-title').textContent    = producto.name;
+    document.getElementById('modal-desc').textContent     = producto.description;
+    document.getElementById('modal-price').textContent    = formatPrice(producto.price);
+    document.getElementById('modal-link').href            = producto.link;
+    document.getElementById('modal-category-label').textContent = (producto.category || 'CATÁLOGO SYNCRO').toUpperCase();
 
-    // Reset scroll interno del modal
     const modalGrid = modal.querySelector('.modal-grid');
     if (modalGrid) modalGrid.scrollTop = 0;
 
@@ -393,7 +499,6 @@ const closeModal = () => {
 
 closeModalBtn.addEventListener('click', closeModal);
 
-// Cerrar al tocar el backdrop (solo el elemento <dialog> directamente)
 modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });

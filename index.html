@@ -27,24 +27,11 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     
+                    <!-- Dropdown generado dinámicamente por JS -->
                     <li class="dropdown-item" id="mobile-dropdown-trigger">
                         <a href="#productos" class="prevent-mobile">Catálogo <span class="chevron">▼</span></a>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-column">
-                                <h4>Colección</h4>
-                                <ul>
-                                    <li><a href="#productos">1</a></li>
-                                    <li><a href="#productos">2</a></li>
-                                    <li><a href="#productos">3</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>Filtros</h4>
-                                <ul>
-                                    <li><a href="#productos">4</a></li>
-                                    <li><a href="#productos">5</a></li>
-                                </ul>
-                            </div>
+                        <div class="dropdown-menu" id="nav-dropdown-menu">
+                            <!-- Se llena desde JS con las categorías del Sheet -->
                         </div>
                     </li>
 
@@ -80,18 +67,23 @@
         <div class="slider-dots" id="slider-dots"></div>
     </section>
 
-    <main id="productos" class="section first-section">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Nuestro Catálogo</h2>
-                <p class="section-subtitle">Cada pieza, hecha con cuidado.</p>
-            </div>
-            <div id="products-grid" class="grid fade-in">
-                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
-                <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
-            </div>
+    <!-- Las secciones de categorías se generan dinámicamente por JS -->
+    <main id="productos">
+        <div id="catalog-sections">
+            <!-- Skeletons mientras carga -->
+            <section class="section first-section">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <div class="skeleton" style="height: 2.4rem; width: 260px; border-radius: 8px;"></div>
+                    </div>
+                    <div class="grid fade-in">
+                        <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                        <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                        <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                        <div class="card-img-wrapper skeleton" style="height: 360px;"></div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -103,7 +95,7 @@
                     <img id="modal-img" src="" alt="Producto">
                 </div>
                 <div class="modal-info">
-                    <span class="modal-category">CATÁLOGO SYNCRO</span>
+                    <span class="modal-category" id="modal-category-label">CATÁLOGO SYNCRO</span>
                     <h3 id="modal-title"></h3>
                     <p id="modal-price" class="modal-price"></p>
                     <div class="modal-divider"></div>
